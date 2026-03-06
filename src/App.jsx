@@ -224,41 +224,53 @@ export default function App() {
       <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
 
         {/* ── Backgrounds ── */}
-        {/* Unsplash: dark abstract tech/network */}
+        {/* Landio ripple dark background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&q=80&auto=format&fit=crop')",
-            opacity: 0.08,
+            backgroundImage: "url('https://framerusercontent.com/images/W7xYkGKzPzvnPv58ZBNzxS3JZI.jpg?width=1920')",
+            opacity: 0.18,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-base via-base/95 to-base/80" />
-
-        {/* Dot grid */}
+        {/* AI-Kit glow pattern */}
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "radial-gradient(circle, #3B82F6 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+            backgroundImage: "url('https://framerusercontent.com/images/5AXsK3MyGYovv57LsfY0T3kRQU.png')",
+            opacity: 0.35,
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/80 to-base" />
 
-        {/* Floating orbs — layered at different depths */}
+        {/* Floating glows */}
         <motion.div
           animate={{ y: [0, -28, 0], x: [0, 12, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.07] blur-[130px] pointer-events-none"
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/[0.08] blur-[140px] pointer-events-none"
         />
         <motion.div
           animate={{ y: [0, 20, 0], x: [0, -15, 0] }}
           transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-purple-600/[0.05] blur-[110px] pointer-events-none"
+          className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-600/[0.07] blur-[120px] pointer-events-none"
         />
+
+        {/* AI-Kit 3D glass torus — decorative floating element top-right */}
         <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/2 left-1/2 w-[300px] h-[300px] rounded-full bg-accent/[0.04] blur-[80px] pointer-events-none"
-        />
+          animate={{ y: [0, -18, 0], rotate: [0, 8, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-12 -right-12 w-[280px] h-[280px] pointer-events-none opacity-30 hidden xl:block"
+        >
+          <img src="https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=2048" alt="" className="w-full h-full object-contain" />
+        </motion.div>
+
+        {/* AI-Kit 3D glass cone — bottom-left */}
+        <motion.div
+          animate={{ y: [0, 14, 0], rotate: [0, -5, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute bottom-8 left-4 w-[180px] h-[180px] pointer-events-none opacity-20 hidden xl:block"
+        >
+          <img src="https://framerusercontent.com/images/07KtB00iioo573QNsZnQtSvK0Ro.png?scale-down-to=512" alt="" className="w-full h-full object-contain" />
+        </motion.div>
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -356,12 +368,12 @@ export default function App() {
                         app.mho.ai/dashboard
                       </div>
                     </div>
-                    {/* Dashboard screenshot */}
+                    {/* AI-Kit real dashboard screenshot from Framerusercontent CDN */}
                     <img
-                      src="/ai-dashboard.png"
+                      src="https://framerusercontent.com/images/iwHrfxAaaKPAVqil6cZS1VwIzg.png?scale-down-to=2048"
                       alt="MHO.AI Dashboard"
                       className="w-full block"
-                      style={{ maxHeight: "360px", objectFit: "cover", objectPosition: "top" }}
+                      style={{ maxHeight: "380px", objectFit: "cover", objectPosition: "top" }}
                     />
                     {/* Bottom shimmer */}
                     <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-base/80 to-transparent" />
@@ -463,7 +475,7 @@ export default function App() {
                         <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
                         <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/analytics</span>
                       </div>
-                      <img src="/ai-dashboard.png" alt="AI Analytics Dashboard" className="w-full block" />
+                      <img src="https://framerusercontent.com/images/iwHrfxAaaKPAVqil6cZS1VwIzg.png?scale-down-to=2048" alt="AI Analytics Dashboard" className="w-full block" />
                     </div>
                   </div>
                 </motion.div>
@@ -497,7 +509,7 @@ export default function App() {
                         <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
                         <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/mlops</span>
                       </div>
-                      <img src="/mlops-dashboard.png" alt="MLOps Dashboard" className="w-full block" />
+                      <img src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=2048" alt="MLOps Dashboard" className="w-full block" />
                     </div>
                   </div>
                 </motion.div>
@@ -531,7 +543,7 @@ export default function App() {
                         <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
                         <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/devops</span>
                       </div>
-                      <img src="/devops-dashboard.png" alt="DevOps Pipeline" className="w-full block" />
+                      <img src="https://framerusercontent.com/images/WFawVIlNEWfL6BADVWkWGjETo80.png?scale-down-to=2048" alt="DevOps Pipeline" className="w-full block" />
                     </div>
                   </div>
                 </motion.div>
