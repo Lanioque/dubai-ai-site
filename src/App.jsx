@@ -310,183 +310,85 @@ export default function App() {
               </p>
             </motion.div>
 
-            {/* ── RIGHT: 3D card ─────────────────────────── */}
+            {/* ── RIGHT: Dashboard screenshot in 3D browser frame ── */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="relative hidden lg:block"
-              style={{ perspective: "1200px" }}
+              style={{ perspective: "1400px" }}
             >
-              {/* Levitation float wrapper */}
+              {/* Levitation */}
               <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
-                {/* 3D tilt wrapper */}
+                {/* 3D tilt on mouse */}
                 <motion.div
                   ref={tilt.ref}
                   onMouseMove={tilt.onMove}
                   onMouseLeave={tilt.onLeave}
-                  style={{
-                    rotateX: tilt.rotateX,
-                    rotateY: tilt.rotateY,
-                    transformStyle: "preserve-3d",
-                  }}
+                  style={{ rotateX: tilt.rotateX, rotateY: tilt.rotateY, transformStyle: "preserve-3d" }}
                   className="relative cursor-default"
                 >
-                  {/* Outer glow */}
-                  <div className="absolute -inset-4 bg-accent/[0.08] blur-2xl rounded-3xl pointer-events-none" />
+                  {/* Ambient glow */}
+                  <div className="absolute -inset-8 bg-accent/[0.12] blur-[60px] rounded-3xl pointer-events-none" />
 
-                  {/* Card body */}
+                  {/* Browser chrome frame */}
                   <div
-                    className="relative rounded-2xl border border-white/10 overflow-hidden"
+                    className="relative rounded-xl overflow-hidden"
                     style={{
-                      background: "linear-gradient(135deg, rgba(17,17,19,0.98) 0%, rgba(24,24,27,0.95) 100%)",
-                      boxShadow: "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06) inset",
+                      boxShadow: "0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08) inset, 0 0 0 1px rgba(255,255,255,0.04)",
                     }}
                   >
-                    {/* Specular shine layer — follows mouse */}
-                    <motion.div
-                      className="absolute inset-0 pointer-events-none rounded-2xl z-20"
-                      style={{
-                        background: "radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.06) 0%, transparent 65%)",
-                      }}
-                    />
-                    {/* Top shine bar */}
-                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-                    <div className="p-5 relative z-10">
-                      {/* Status bar */}
+                    {/* Title bar */}
+                    <div
+                      className="flex items-center gap-2 px-4 py-3"
+                      style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                    >
+                      <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                      <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+                      <span className="w-3 h-3 rounded-full bg-[#28C840]" />
                       <div
-                        className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4"
-                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                        className="ml-3 flex-1 rounded-md px-3 py-1 text-[0.65rem] text-white/30 font-mono"
+                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
                       >
-                        <svg className="w-3.5 h-3.5 text-t-tertiary flex-shrink-0" fill="none" viewBox="0 0 16 16">
-                          <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.3" />
-                          <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                        </svg>
-                        <span className="text-t-tertiary text-xs">Active workflows</span>
-                        <span className="ml-auto flex items-center gap-1.5 text-[0.65rem] text-emerald-400 font-semibold">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          Live
-                        </span>
-                      </div>
-
-                      {/* Card 1 — AI pipeline */}
-                      <motion.div
-                        whileHover={{ scale: 1.01, borderColor: "rgba(59,130,246,0.4)" }}
-                        className="rounded-xl p-4 mb-3 transition-all duration-300"
-                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transform: "translateZ(20px)" }}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div
-                            className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                            style={{ background: "rgba(59,130,246,0.12)", border: "1px solid rgba(59,130,246,0.25)" }}
-                          >
-                            <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 20 20">
-                              <path d="M4 5h12M4 10h8M4 15h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                            </svg>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-0.5">
-                              <span className="text-t-primary text-sm font-semibold">Document AI Pipeline</span>
-                              <span className="text-accent text-[0.62rem] font-semibold bg-accent/10 px-1.5 py-0.5 rounded">AI</span>
-                            </div>
-                            <span className="text-t-tertiary text-xs">Auto extraction · Arabic & English</span>
-                            <div className="flex items-center gap-2 mt-2">
-                              <div className="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
-                                <motion.div
-                                  initial={{ width: "0%" }}
-                                  animate={{ width: "87%" }}
-                                  transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
-                                  className="h-full rounded-full bg-accent"
-                                />
-                              </div>
-                              <span className="text-[0.62rem] text-accent font-medium">87%</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Card 2 — MLOps */}
-                      <motion.div
-                        whileHover={{ scale: 1.01, borderColor: "rgba(168,85,247,0.4)" }}
-                        className="rounded-xl p-4 mb-4 transition-all duration-300"
-                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transform: "translateZ(14px)" }}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div
-                            className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                            style={{ background: "rgba(168,85,247,0.1)", border: "1px solid rgba(168,85,247,0.2)" }}
-                          >
-                            <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 20 20">
-                              <path d="M10 3v4M10 13v4M3 10h4M13 10h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                              <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-                            </svg>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-0.5">
-                              <span className="text-t-primary text-sm font-semibold">MLOps Deployment</span>
-                              <span className="text-purple-400 text-[0.62rem] font-semibold bg-purple-500/10 px-1.5 py-0.5 rounded">MLOps</span>
-                            </div>
-                            <span className="text-t-tertiary text-xs">Model serving · Auto retraining</span>
-                            <div className="flex items-center gap-3 mt-2 text-[0.62rem] text-t-tertiary">
-                              <span className="text-emerald-400">✓ In production</span>
-                              <span>· Fast inference</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Pills row */}
-                      <div className="flex flex-wrap gap-1.5" style={{ transform: "translateZ(8px)" }}>
-                        {["AI & LLMs", "DevOps", "MLOps", "Managed IT"].map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-1.5 text-[0.65rem] font-medium text-t-secondary px-2.5 py-1 rounded-full"
-                            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-                          >
-                            <span className="w-1 h-1 rounded-full bg-accent/70" />
-                            {tag}
-                          </span>
-                        ))}
+                        app.mho.ai/dashboard
                       </div>
                     </div>
+                    {/* Dashboard screenshot */}
+                    <img
+                      src="/ai-dashboard.png"
+                      alt="MHO.AI Dashboard"
+                      className="w-full block"
+                      style={{ maxHeight: "360px", objectFit: "cover", objectPosition: "top" }}
+                    />
+                    {/* Bottom shimmer */}
+                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-base/80 to-transparent" />
                   </div>
 
-                  {/* Floating badge — top right, separate depth layer */}
+                  {/* Floating badge — top right */}
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                     className="absolute -top-4 -right-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400"
-                    style={{
-                      background: "rgba(16,24,22,0.95)",
-                      border: "1px solid rgba(52,211,153,0.3)",
-                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
-                      transform: "translateZ(40px)",
-                    }}
+                    style={{ background: "rgba(16,24,22,0.96)", border: "1px solid rgba(52,211,153,0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.5)", transform: "translateZ(40px)" }}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Systems operational
+                    All systems live
                   </motion.div>
 
                   {/* Floating badge — bottom left */}
                   <motion.div
                     animate={{ y: [0, 5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-accent"
-                    style={{
-                      background: "rgba(9,9,11,0.95)",
-                      border: "1px solid rgba(59,130,246,0.3)",
-                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
-                      transform: "translateZ(40px)",
-                    }}
+                    className="absolute -bottom-3 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-accent"
+                    style={{ background: "rgba(9,9,11,0.96)", border: "1px solid rgba(59,130,246,0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.5)", transform: "translateZ(40px)" }}
                   >
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                       <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    New deployment ready
+                    New model deployed
                   </motion.div>
 
                 </motion.div>
@@ -497,9 +399,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           MARQUEE
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <div className="border-t border-b-subtle py-6 overflow-hidden select-none">
         <Reveal>
           <div className="text-center mb-4">
@@ -510,16 +412,134 @@ export default function App() {
         </Reveal>
         <div className="flex gap-16 animate-marquee whitespace-nowrap" style={{ width: "max-content" }}>
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span
-              key={i}
-              className="text-t-tertiary/50 hover:text-t-secondary text-[0.7rem] font-medium tracking-[0.15em] uppercase transition-colors duration-300 cursor-default flex items-center gap-4"
-            >
+            <span key={i} className="text-t-tertiary/50 hover:text-t-secondary text-[0.7rem] font-medium tracking-[0.15em] uppercase transition-colors duration-300 cursor-default flex items-center gap-4">
               <span className="text-[5px] text-b-subtle">●</span>
               {item}
             </span>
           ))}
         </div>
       </div>
+
+      {/* ══════════════
+          PLATFORM PREVIEWS
+      ══════════════ */}
+      <section className="py-24 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <Reveal className="text-center mb-14">
+            <SectionLabel center>The Platform</SectionLabel>
+            <h2 className="text-[2.4rem] sm:text-[2.8rem] font-bold tracking-[-0.025em] leading-tight mb-4">
+              Tools built for enterprise scale.
+            </h2>
+            <p className="text-t-secondary text-lg max-w-lg mx-auto">
+              A unified platform for AI, MLOps, and DevOps — from first model to full production.
+            </p>
+          </Reveal>
+
+          <div className="flex flex-col gap-20">
+            {/* Row 1: AI Dashboard — large, slightly tilted */}
+            <Reveal>
+              <div className="relative" style={{ perspective: "1200px" }}>
+                <motion.div
+                  whileHover={{ rotateX: -2, rotateY: 3, scale: 1.01 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  className="relative"
+                >
+                  <div className="absolute -inset-10 bg-accent/[0.06] blur-[80px] rounded-full pointer-events-none" />
+                  <div className="flex items-start gap-8 lg:gap-16">
+                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
+                      <span className="text-accent text-xs font-semibold tracking-widest uppercase mb-3 block">AI Analytics</span>
+                      <h3 className="text-2xl font-bold tracking-tight mb-3">Real-time model monitoring</h3>
+                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Track inference latency, accuracy drift, and pipeline health across all your deployed models from a single pane.</p>
+                      <div className="flex flex-wrap gap-2">
+                        {["Model Tracking", "Drift Detection", "Live Metrics"].map(t => (
+                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
+                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/analytics</span>
+                      </div>
+                      <img src="/ai-dashboard.png" alt="AI Analytics Dashboard" className="w-full block" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </Reveal>
+
+            {/* Row 2: MLOps — right-aligned */}
+            <Reveal>
+              <div className="relative" style={{ perspective: "1200px" }}>
+                <motion.div
+                  whileHover={{ rotateX: -2, rotateY: -3, scale: 1.01 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  className="relative"
+                >
+                  <div className="absolute -inset-10 bg-purple-600/[0.06] blur-[80px] rounded-full pointer-events-none" />
+                  <div className="flex items-start gap-8 lg:gap-16 flex-row-reverse">
+                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
+                      <span className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-3 block">MLOps</span>
+                      <h3 className="text-2xl font-bold tracking-tight mb-3">Model health monitoring</h3>
+                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Detect data drift, monitor prediction quality, and manage the full ML lifecycle from training to production deployment.</p>
+                      <div className="flex flex-wrap gap-2">
+                        {["Data Drift", "Auto Retraining", "Model Registry"].map(t => (
+                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
+                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/mlops</span>
+                      </div>
+                      <img src="/mlops-dashboard.png" alt="MLOps Dashboard" className="w-full block" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </Reveal>
+
+            {/* Row 3: DevOps — left */}
+            <Reveal>
+              <div className="relative" style={{ perspective: "1200px" }}>
+                <motion.div
+                  whileHover={{ rotateX: -2, rotateY: 3, scale: 1.01 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  className="relative"
+                >
+                  <div className="absolute -inset-10 bg-emerald-600/[0.05] blur-[80px] rounded-full pointer-events-none" />
+                  <div className="flex items-start gap-8 lg:gap-16">
+                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
+                      <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3 block">DevOps</span>
+                      <h3 className="text-2xl font-bold tracking-tight mb-3">CI/CD pipelines at a glance</h3>
+                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Full visibility into every deployment. Real-time stage tracking, terminal logs, and environment health — all in one view.</p>
+                      <div className="flex flex-wrap gap-2">
+                        {["Pipeline Runs", "Deploy Logs", "Env Status"].map(t => (
+                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
+                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/devops</span>
+                      </div>
+                      <img src="/devops-dashboard.png" alt="DevOps Pipeline" className="w-full block" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════
           CONTEXT BAND (replaces Stats)
