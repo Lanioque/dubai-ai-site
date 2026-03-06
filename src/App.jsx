@@ -341,15 +341,6 @@ export default function App() {
       <section className="relative py-28 px-6 overflow-hidden" id="problem">
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal>
-            <div className="mb-8 block">
-              <motion.div
-                animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
-              >
-                <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Cube 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
-              </motion.div>
-            </div>
             <SectionLabel>The Problem</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold leading-tight tracking-[-0.025em] mb-10 max-w-2xl">
               Legacy systems and slow delivery are costing GCC enterprises their edge.
@@ -470,16 +461,18 @@ export default function App() {
           <Reveal delay={0.1}>
             <div className="bg-surface border border-b-subtle rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Photo side */}
-                <div className="relative min-h-[240px] lg:min-h-0 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80&auto=format&fit=crop"
-                    alt="Enterprise operations"
-                    className="absolute inset-0 w-full h-full object-cover opacity-60"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/80 lg:from-transparent lg:to-surface/60" />
+                {/* 3D Visual side */}
+                <div className="relative min-h-[240px] lg:min-h-0 overflow-hidden flex items-center justify-center bg-b-subtle/30">
+                  <motion.div
+                    animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]"
+                  >
+                    <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Enterprise operations 3D Cube" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/40 lg:from-transparent lg:to-surface/20 pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 backdrop-blur-sm text-accent text-xs font-semibold px-3 py-1.5 rounded-full">
+                    <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 backdrop-blur-sm text-accent text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
                       <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                       Real deployment · GCC conglomerate
                     </div>
@@ -643,40 +636,35 @@ export default function App() {
           CTA
       ══════════════ */}
       <section className="py-28 px-6 relative overflow-hidden">
-        {/* Unsplash: Dubai skyline night */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1600&q=80&auto=format&fit=crop')",
-            opacity: 0.12,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.07] blur-[150px] rounded-full pointer-events-none" />
 
         <motion.div
           whileHover={{ scale: 1.005 }}
-          className="relative z-10 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-3xl max-w-5xl mx-auto overflow-hidden"
+          className="relative z-10 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-3xl max-w-5xl mx-auto overflow-hidden flex flex-col md:flex-row items-center"
           style={{ boxShadow: "0 40px 120px rgba(0,0,0,0.6)" }}
         >
           {/* Top shimmer */}
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-          <div className="py-20 px-6 text-center">
+
+          {/* 3D Visual Left Side */}
+          <div className="w-full md:w-1/3 flex justify-center py-10 md:py-0">
+            <motion.div
+              animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-[180px] h-[180px] md:w-[240px] md:h-[240px]"
+            >
+              <img
+                src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png"
+                alt="Cone 3D icon"
+                className="w-full h-full object-contain drop-shadow-2xl"
+                style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
+              />
+            </motion.div>
+          </div>
+
+          <div className="w-full md:w-2/3 py-20 px-6 text-left border-l border-white/5">
             <Reveal>
-              <div className="mb-8 flex justify-center">
-                <motion.div
-                  animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
-                >
-                  <img
-                    src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png"
-                    alt="Cone 3D icon"
-                    className="w-full h-full object-contain drop-shadow-2xl"
-                    style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
-                  />
-                </motion.div>
-              </div>
               <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-5">
                 Ready to modernize your operations?
               </h2>
