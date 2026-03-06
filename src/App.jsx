@@ -225,7 +225,7 @@ export default function App() {
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden" id="hero">
 
         {/* ── Video Background ── */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full bg-accent/20">
           <video
             autoPlay
             loop
@@ -234,6 +234,7 @@ export default function App() {
             className="w-full h-full object-cover opacity-60 mix-blend-screen"
             src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4"
           />
+          <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
           {/* Top/bottom gradient fades to blend with the rest of the page */}
           <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
         </div>
