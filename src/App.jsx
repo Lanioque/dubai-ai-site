@@ -238,34 +238,6 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
         </div>
 
-        {/* AI-Kit 3D shapes — decorative floating elements */}
-        {/* Top left torus */}
-        <motion.div
-          animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] left-[10%] w-[140px] h-[140px] md:w-[220px] md:h-[220px] pointer-events-none opacity-40 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
-        {/* Bottom right cone */}
-        <motion.div
-          animate={{ y: [0, 20, 0], rotate: [0, -15, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[20%] right-[10%] w-[120px] h-[120px] md:w-[180px] md:h-[180px] pointer-events-none opacity-40 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
-        {/* Upper right sphere */}
-        <motion.div
-          animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-[25%] right-[20%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-30 mix-blend-screen hidden md:block"
-        >
-          <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
         {/* ── Centered Content ── */}
         <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center mt-20">
           <motion.div
