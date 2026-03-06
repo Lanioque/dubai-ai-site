@@ -345,10 +345,9 @@ export default function App() {
               <motion.div
                 animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[100px] h-[100px]"
+                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Cube 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
-                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+                <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Cube 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel>The Problem</SectionLabel>
@@ -410,10 +409,9 @@ export default function App() {
               <motion.div
                 animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[100px] h-[100px]"
+                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
-                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel>What We Do</SectionLabel>
@@ -566,10 +564,9 @@ export default function App() {
               <motion.div
                 animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[100px] h-[100px]"
+                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
-                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel center>How We Work</SectionLabel>
@@ -670,10 +667,14 @@ export default function App() {
                 <motion.div
                   animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-[100px] h-[100px]"
+                  className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
                 >
-                  <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="Cone 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
-                  <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+                  <img
+                    src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png"
+                    alt="Cone 3D icon"
+                    className="w-full h-full object-contain drop-shadow-2xl"
+                    style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
+                  />
                 </motion.div>
               </div>
               <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-5">
