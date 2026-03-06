@@ -544,9 +544,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           PROBLEM
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="problem">
         <div className="max-w-5xl mx-auto">
           <Reveal>
@@ -557,37 +557,51 @@ export default function App() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               {[
-                { label: "Manual processes", desc: "Most large enterprises in the region still handle critical workflows manually — approvals, reporting, onboarding." },
-                { label: "Slow delivery", desc: "Long development cycles and fragile infrastructure prevent teams from shipping improvements quickly." },
-                { label: "AI without strategy", desc: "Many companies experiment with AI tools in isolation, with no plan to scale or embed them into real operations." },
+                { icon: "⚙", label: "Manual processes", desc: "Critical workflows still routed by email, documents processed by hand, no real-time visibility." },
+                { icon: "⏳", label: "Slow delivery", desc: "Long cycles and fragile infra prevent teams from shipping improvements quickly." },
+                { icon: "🧩", label: "AI without strategy", desc: "Companies experiment with AI in isolation, no plan to scale or embed it into real operations." },
               ].map((s, i) => (
-                <div key={i} className="border-l-2 border-b-subtle pl-5">
-                  <div className="text-t-primary font-semibold text-base mb-1">{s.label}</div>
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02, rotateY: 2 }}
+                  style={{ perspective: "800px", transformStyle: "preserve-3d" }}
+                  className="bg-surface border border-b-subtle rounded-2xl p-7 cursor-default transition-all duration-300 hover:border-accent/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+                >
+                  <div className="text-2xl mb-3">{s.icon}</div>
+                  <div className="text-t-primary font-semibold text-base mb-2">{s.label}</div>
                   <div className="text-sm text-t-secondary leading-relaxed">{s.desc}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="bg-surface border border-b-subtle border-l-4 border-l-accent rounded-2xl p-8 sm:p-10">
-              <div className="text-t-primary text-xl font-semibold mb-3">
-                The cost of inaction compounds every quarter.
+            <div className="relative rounded-2xl overflow-hidden border border-b-subtle">
+              {/* Unsplash: dark enterprise office */}
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=75&auto=format&fit=crop')", opacity: 0.12 }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/60" />
+              <div className="relative z-10 p-8 sm:p-10">
+                <div className="text-t-primary text-xl font-semibold mb-3">
+                  The cost of inaction compounds every quarter.
+                </div>
+                <p className="text-t-secondary text-lg leading-relaxed max-w-2xl">
+                  While competitors modernize, organizations stuck on manual processes and fragmented IT lose speed, talent, and market share.
+                  The window to act is now — and we make it fast.
+                </p>
               </div>
-              <p className="text-t-secondary text-lg leading-relaxed max-w-2xl">
-                While competitors modernize, organizations stuck on manual processes and fragmented IT lose speed, talent, and market share.
-                The window to act is now — and we make it fast.
-              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           SERVICES
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="services">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
@@ -604,9 +618,12 @@ export default function App() {
             {SERVICES.map((svc, i) => (
               <Reveal key={i} delay={i * 0.08} className={svc.featured ? "md:row-span-2" : ""}>
                 <motion.div
-                  whileHover={{ borderColor: C.borderHov }}
-                  className={`h-full bg-surface border border-b-subtle rounded-2xl p-8 transition-all duration-300 hover:shadow-[0_0_60px_rgba(59,130,246,0.04)] ${svc.featured ? "flex flex-col justify-between" : ""}`}
+                  whileHover={{ scale: 1.02, rotateX: -1.5, rotateY: 2 }}
+                  style={{ perspective: "900px", transformStyle: "preserve-3d" }}
+                  className={`h-full bg-surface border border-b-subtle rounded-2xl p-8 cursor-default transition-all duration-300 hover:border-accent/40 hover:shadow-[0_24px_80px_rgba(0,0,0,0.5)] ${svc.featured ? "flex flex-col justify-between" : ""}`}
                 >
+                  {/* Top shine */}
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-t-2xl" />
                   <div>
                     <div className="flex items-center gap-3 mb-5">
                       <span className="text-accent text-sm font-semibold">{svc.num}</span>
@@ -629,9 +646,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           USE CASE
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="use-cases">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
@@ -642,37 +659,51 @@ export default function App() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="bg-surface border border-b-subtle rounded-2xl overflow-hidden">
+            <div className="bg-surface border border-b-subtle rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Narrative */}
-                <div className="p-8 sm:p-10 lg:border-r lg:border-b-subtle">
-                  <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-6">
-                    A regional conglomerate was running critical procurement workflows manually — approvals routed by email, documents processed by hand, no real-time visibility for the finance team.
-                  </p>
-                  <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-6">
-                    We deployed an AI-powered procurement layer integrated with their existing ERP — automated document extraction, intelligent validation, instant approval routing, and spend dashboards.
-                  </p>
-                  <p className="text-t-primary text-[0.95rem] leading-relaxed font-medium">
-                    The finance team now handles far higher volumes with the same headcount. Approval cycles went from days to hours.
-                  </p>
+                {/* Photo side */}
+                <div className="relative min-h-[240px] lg:min-h-0 overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80&auto=format&fit=crop"
+                    alt="Enterprise operations"
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/80 lg:from-transparent lg:to-surface/60" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 backdrop-blur-sm text-accent text-xs font-semibold px-3 py-1.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      Real deployment · GCC conglomerate
+                    </div>
+                  </div>
                 </div>
 
-                {/* Outcomes */}
-                <div className="p-8 sm:p-10 flex flex-col">
-                  {[
-                    { val: "Significantly faster", label: "Document processing time" },
-                    { val: "High accuracy", label: "AI extraction — Arabic & English" },
-                    { val: "Weeks, not months", label: "From kickoff to production" },
-                    { val: "Measurable savings", label: "Annualized operational cost reduction" },
-                  ].map((m, i) => (
-                    <div key={i} className={`flex items-start gap-4 py-5 ${i > 0 ? "border-t border-b-subtle" : ""}`}>
-                      <div className="w-1 h-full min-h-[40px] bg-accent/30 rounded-full flex-shrink-0" />
-                      <div>
-                        <div className="text-[1.4rem] font-bold text-t-primary tracking-tight leading-none mb-1">{m.val}</div>
-                        <div className="text-sm text-t-tertiary">{m.label}</div>
-                      </div>
-                    </div>
-                  ))}
+                {/* Narrative + metrics */}
+                <div>
+                  <div className="p-8 sm:p-10 border-b border-b-subtle">
+                    <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-4">
+                      A regional conglomerate was running critical procurement workflows manually — approvals routed by email, documents processed by hand, no real-time visibility for the finance team.
+                    </p>
+                    <p className="text-t-primary text-[0.95rem] leading-relaxed font-medium">
+                      We deployed an AI-powered procurement layer integrated with their existing ERP — automated extraction, intelligent validation, instant approval routing.
+                    </p>
+                  </div>
+                  <div className="p-8 sm:p-10 grid grid-cols-2 gap-4">
+                    {[
+                      { val: "Significantly faster", label: "Processing time" },
+                      { val: "High accuracy", label: "AI extraction" },
+                      { val: "Weeks, not months", label: "Kickoff to prod" },
+                      { val: "Measurable savings", label: "Cost reduction" },
+                    ].map((m, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.03 }}
+                        className="bg-elevated border border-b-subtle rounded-xl p-4 cursor-default"
+                      >
+                        <div className="text-[1.1rem] font-bold text-t-primary leading-tight mb-1">{m.val}</div>
+                        <div className="text-xs text-t-tertiary">{m.label}</div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -680,9 +711,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           WHY US
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="whyus">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
@@ -699,9 +730,11 @@ export default function App() {
             {WHY_US.map((w, i) => (
               <Reveal key={i} delay={i * 0.08}>
                 <motion.div
-                  whileHover={{ borderColor: C.borderHov }}
-                  className="bg-surface border border-b-subtle rounded-2xl p-8 transition-all duration-300 hover:shadow-[0_0_60px_rgba(59,130,246,0.04)] h-full"
+                  whileHover={{ scale: 1.02, rotateX: -1, rotateY: i % 2 === 0 ? 2 : -2 }}
+                  style={{ perspective: "900px", transformStyle: "preserve-3d" }}
+                  className="relative bg-surface border border-b-subtle rounded-2xl p-8 cursor-default transition-all duration-300 hover:border-accent/35 hover:shadow-[0_20px_70px_rgba(0,0,0,0.45)] h-full overflow-hidden"
                 >
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                   <span className="text-accent text-sm font-semibold mb-4 block">{w.num}</span>
                   <h3 className="text-[1.1rem] font-semibold tracking-[-0.01em] mb-3">{w.title}</h3>
                   <p className="text-t-secondary text-sm leading-relaxed">{w.desc}</p>
@@ -712,9 +745,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           PROCESS
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="process">
         <div className="max-w-5xl mx-auto">
           <Reveal className="text-center max-w-lg mx-auto mb-16">
@@ -724,44 +757,27 @@ export default function App() {
             </h2>
           </Reveal>
 
-          {/* Horizontal stepper — desktop */}
-          <div className="hidden lg:block mb-16">
-            <div className="relative">
-              <div className="absolute top-3 left-0 right-0 h-px bg-b-subtle" />
-              <div className="grid grid-cols-4 gap-8">
-                {PROCESS_STEPS.map((step, i) => (
-                  <Reveal key={i} delay={i * 0.15}>
-                    <div className="relative">
-                      <div className="w-6 h-6 rounded-full bg-base border-2 border-accent flex items-center justify-center mb-6 relative z-10">
-                        <div className="w-2 h-2 rounded-full bg-accent" />
-                      </div>
-                      <h4 className="font-semibold text-[1rem] mb-2">{step.title}</h4>
-                      <p className="text-t-secondary text-sm leading-relaxed">{step.desc}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Vertical stepper — mobile */}
-          <div className="lg:hidden mb-16">
-            <div className="relative pl-8">
-              <div className="absolute top-0 bottom-0 left-3 w-px bg-b-subtle" />
-              <div className="flex flex-col gap-10">
-                {PROCESS_STEPS.map((step, i) => (
-                  <Reveal key={i} delay={i * 0.1}>
-                    <div className="relative">
-                      <div className="absolute -left-8 top-0 w-6 h-6 rounded-full bg-base border-2 border-accent flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-accent" />
-                      </div>
-                      <h4 className="font-semibold text-[1rem] mb-2">{step.title}</h4>
-                      <p className="text-t-secondary text-sm leading-relaxed">{step.desc}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+            {PROCESS_STEPS.map((step, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ scale: 1.04, rotateY: 3, rotateX: -2 }}
+                  style={{ perspective: "700px", transformStyle: "preserve-3d" }}
+                  className="relative bg-surface border border-b-subtle rounded-2xl p-6 cursor-default h-full hover:border-accent/40 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  {/* Step number */}
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-5 font-bold text-sm"
+                    style={{ background: "rgba(59,130,246,0.12)", border: "1px solid rgba(59,130,246,0.25)", color: "#3B82F6" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h4 className="font-semibold text-[1rem] mb-2 text-t-primary">{step.title}</h4>
+                  <p className="text-t-secondary text-sm leading-relaxed">{step.desc}</p>
+                </motion.div>
+              </Reveal>
+            ))}
           </div>
 
           <Reveal className="text-center">
@@ -775,9 +791,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           INDUSTRIES
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6" id="industries">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
@@ -791,10 +807,12 @@ export default function App() {
             {INDUSTRIES.map((ind, i) => (
               <Reveal key={i} delay={i * 0.04}>
                 <motion.div
-                  whileHover={{ y: -2, borderColor: C.borderHov }}
-                  className="bg-surface border border-b-subtle rounded-xl p-5 transition-all duration-300 cursor-default"
+                  whileHover={{ scale: 1.05, rotateY: 3, borderColor: "rgba(59,130,246,0.45)" }}
+                  style={{ perspective: "600px", transformStyle: "preserve-3d" }}
+                  className="relative bg-surface border border-b-subtle rounded-xl p-5 cursor-default hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 overflow-hidden"
                 >
-                  <h4 className="font-medium text-sm text-t-primary mb-1.5">{ind.title}</h4>
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  <h4 className="font-semibold text-sm text-t-primary mb-1.5">{ind.title}</h4>
                   <p className="text-t-tertiary text-xs leading-relaxed">{ind.names}</p>
                 </motion.div>
               </Reveal>
@@ -803,13 +821,28 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
+      {/* ══════════════
           CTA
-      ══════════════════════════════════════════════════ */}
+      ══════════════ */}
       <section className="py-28 px-6 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.06] blur-[150px] rounded-full pointer-events-none" />
+        {/* Unsplash: Dubai skyline night */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1600&q=80&auto=format&fit=crop')",
+            opacity: 0.12,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.07] blur-[150px] rounded-full pointer-events-none" />
 
-        <div className="bg-surface border border-b-subtle rounded-3xl max-w-5xl mx-auto relative z-10">
+        <motion.div
+          whileHover={{ scale: 1.005 }}
+          className="relative z-10 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-3xl max-w-5xl mx-auto overflow-hidden"
+          style={{ boxShadow: "0 40px 120px rgba(0,0,0,0.6)" }}
+        >
+          {/* Top shimmer */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div className="py-20 px-6 text-center">
             <Reveal>
               <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-5">
@@ -827,7 +860,7 @@ export default function App() {
               </a>
             </Reveal>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ══════════════════════════════════════════════════
