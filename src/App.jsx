@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Navbar, NavbarBrand, NavbarContent, NavbarItem,
-  NavbarMenuToggle, NavbarMenu, NavbarMenuItem,
-  Button,
-} from "@heroui/react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 /* ──────────────────────────────────────────────────────────
    THEME
@@ -39,26 +34,6 @@ function Reveal({ children, delay = 0, className = "" }) {
 }
 
 /* ──────────────────────────────────────────────────────────
-   ANIMATED COUNTER
-────────────────────────────────────────────────────────── */
-function Counter({ value, suffix = "", prefix = "" }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  useEffect(() => {
-    if (!inView) return;
-    const dur = 1800, start = performance.now();
-    const tick = (ts) => {
-      const p = Math.min((ts - start) / dur, 1);
-      setCount(Math.round((1 - Math.pow(1 - p, 3)) * value));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [inView, value]);
-  return <span ref={ref}>{prefix}{count}{suffix}</span>;
-}
-
-/* ──────────────────────────────────────────────────────────
    SECTION LABEL
 ────────────────────────────────────────────────────────── */
 function SectionLabel({ children, center = false }) {
@@ -76,37 +51,43 @@ function SectionLabel({ children, center = false }) {
 const SERVICES = [
   {
     num: "01",
-    title: "Document AI & Smart OCR",
-    desc: "Automatically extract, classify, and validate data from any document — purchase orders, invoices, contracts, KYC forms. 95%+ accuracy, Arabic & English, any format.",
-    tags: ["OCR Engine", "Data Extraction", "Auto-Validation", "Arabic Support"],
+    title: "Artificial Intelligence",
+    desc: "Custom AI solutions built for your workflows — intelligent document processing, predictive analytics, LLM integrations, and AI-powered decision automation. Arabic & English, any stack.",
+    tags: ["LLM Integration", "Predictive Analytics", "Document AI", "Arabic NLP"],
     featured: true,
   },
   {
     num: "02",
-    title: "AI Workflow Automation",
-    desc: "Integrate intelligent automation directly into your SAP, Oracle, or Microsoft 365 environment. No rip-and-replace — we make your existing systems exponentially smarter.",
-    tags: ["SAP Integration", "M365 AI", "RPA + AI", "Real-time Alerts"],
+    title: "DevOps & Cloud",
+    desc: "End-to-end DevOps pipelines, CI/CD automation, and cloud infrastructure on AWS, Azure, or GCP. We accelerate your delivery cycles without disrupting your existing teams.",
+    tags: ["CI/CD", "Kubernetes", "Cloud Migration", "Infrastructure as Code"],
   },
   {
     num: "03",
-    title: "Digital Transformation Advisory",
-    desc: "Strategy-to-execution consulting for GCC enterprises. We audit your operations, build your AI roadmap, select the right vendors, and guide implementation from A to Z.",
-    tags: ["AI Roadmap", "Process Audit", "Change Management", "ROI Modeling"],
+    title: "MLOps & Model Deployment",
+    desc: "We operationalize your AI models — from experimentation to production. Model monitoring, retraining pipelines, versioning, and scalable serving infrastructure.",
+    tags: ["Model Serving", "Pipeline Automation", "Monitoring", "Retraining"],
+  },
+  {
+    num: "04",
+    title: "IT Strategy & Managed Services",
+    desc: "Technology advisory and managed IT for GCC enterprises. We audit your stack, align your IT roadmap with business goals, and provide ongoing support so your teams can focus on growth.",
+    tags: ["IT Audit", "Managed Services", "Roadmap", "Vendor Management"],
   },
 ];
 
 const WHY_US = [
-  { num: "01", title: "Mixed Business + Technical Profile", desc: "We speak CFO and CTO in the same meeting. Our team bridges the gap between technical capability and business ROI — no translation needed." },
+  { num: "01", title: "Business + Technical in One Team", desc: "We speak CFO and CTO in the same meeting. Our team bridges the gap between technical capability and business ROI — no translation needed." },
   { num: "02", title: "Deeply Rooted in Dubai & the GCC", desc: "Local entity, local team, local network. We understand the region's business culture, procurement cycles, and decision-making dynamics." },
-  { num: "03", title: "POC-First. Results Before Contract.", desc: "30-day proof of concept on your real data, at reduced or zero cost. You see measurable results before signing anything." },
-  { num: "04", title: "Credible Traction from Day One", desc: "We're already in active discussions with regional references. We accelerate from existing relationships and proven use cases." },
+  { num: "03", title: "POC-First. Results Before Contract.", desc: "We run a short proof of concept on your real environment and data. You see tangible impact before signing anything." },
+  { num: "04", title: "Full-Stack Capability", desc: "From AI models and backend infrastructure to DevOps pipelines and IT governance — we cover the entire technology stack." },
 ];
 
 const PROCESS_STEPS = [
-  { num: "01", title: "Discovery Call", desc: "30 minutes to map your biggest operational pain point and identify the highest-ROI automation opportunity." },
-  { num: "02", title: "POC Design", desc: "We design a targeted proof of concept scoped around your actual data. Clear deliverables, clear success metrics." },
-  { num: "03", title: "30-Day Deployment", desc: "We build and deploy. Live results on your real workflows — measurable impact, zero disruption to your teams." },
-  { num: "04", title: "Scale & Expand", desc: "We productionize, integrate fully, and roll out to other departments. Ongoing support and optimization included." },
+  { num: "01", title: "Discovery Call", desc: "A focused conversation to understand your operations, technology stack, and the highest-impact opportunities." },
+  { num: "02", title: "Scoped POC", desc: "We design a targeted proof of concept on your actual data and environment. Clear deliverables, clear success criteria." },
+  { num: "03", title: "Rapid Deployment", desc: "We build and ship fast. Live results on your real workflows with zero disruption to your teams." },
+  { num: "04", title: "Scale & Operate", desc: "We productionize, integrate, and support. Ongoing optimization included — we remain your technology partner." },
 ];
 
 const INDUSTRIES = [
@@ -146,94 +127,86 @@ export default function App() {
       {/* ══════════════════════════════════════════════════
           NAV
       ══════════════════════════════════════════════════ */}
-      <Navbar
-        isMenuOpen={menuOpen}
-        onMenuOpenChange={setMenuOpen}
-        className={`transition-all duration-300 fixed top-0 z-50 ${scrolled
-          ? "bg-base/80 backdrop-blur-xl border-b border-b-subtle"
-          : "bg-transparent"
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-base/80 backdrop-blur-xl border-b border-b-subtle" : "bg-transparent"
           }`}
-        maxWidth="xl"
       >
-        <NavbarContent>
-          <NavbarMenuToggle
-            className="sm:hidden text-t-primary"
-            icon={(isOpen) => (
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {isOpen ? (
-                  <>
-                    <line x1="4" y1="4" x2="16" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="16" y1="4" x2="4" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </>
-                ) : (
-                  <>
-                    <line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </>
-                )}
-              </svg>
-            )}
-          />
-          <NavbarBrand>
-            <span className="font-bold text-lg text-t-primary tracking-tight">
-              [YOUR COMPANY]
-            </span>
-          </NavbarBrand>
-        </NavbarContent>
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
 
-        <NavbarContent className="hidden sm:flex gap-8" justify="center">
-          {NAV_LINKS.map((l) => (
-            <NavbarItem key={l}>
-              <a href={`#${l.toLowerCase().replace(" ", "-")}`}
-                className="text-t-tertiary hover:text-t-primary text-sm font-medium transition-colors duration-200">
-                {l}
-              </a>
-            </NavbarItem>
-          ))}
-        </NavbarContent>
+          {/* Brand */}
+          <a href="#hero" className="font-extrabold text-xl tracking-[-0.045em] text-t-primary select-none">
+            MHO<span className="text-accent">.AI</span>
+          </a>
 
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button as="a" href="mailto:alexandre.arnaud@mho.ae"
-              className="bg-accent text-white font-semibold text-sm"
-              radius="md" size="sm">
-              Book a Call
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
+          {/* Desktop CTA */}
+          <a
+            href="mailto:alexandre.arnaud@mho.ae"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-t-secondary hover:text-t-primary transition-colors duration-200 group"
+          >
+            Book a Discovery Call
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </a>
 
-        <NavbarMenu className="bg-base/95 backdrop-blur-xl pt-6">
-          {NAV_LINKS.map((l) => (
-            <NavbarMenuItem key={l}>
-              <a href={`#${l.toLowerCase().replace(" ", "-")}`}
-                onClick={() => setMenuOpen(false)}
-                className="text-t-secondary hover:text-t-primary text-lg font-medium py-2 block transition-colors">
-                {l}
-              </a>
-            </NavbarMenuItem>
-          ))}
-          <NavbarMenuItem>
-            <a href="mailto:alexandre.arnaud@mho.ae"
-              className="text-accent font-semibold text-lg py-2 block">
-              Book a Call →
-            </a>
-          </NavbarMenuItem>
-        </NavbarMenu>
-      </Navbar>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="sm:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8 text-t-secondary"
+            aria-label="Toggle menu"
+          >
+            <motion.span animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }}
+              className="block w-5 h-px bg-current origin-center" />
+            <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.15 }}
+              className="block w-5 h-px bg-current" />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }}
+              className="block w-5 h-px bg-current origin-center" />
+          </button>
+        </div>
+
+        {/* Mobile dropdown */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.18 }}
+              className="sm:hidden bg-base/95 backdrop-blur-xl border-b border-b-subtle"
+            >
+              <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-3">
+                {NAV_LINKS.map((l) => (
+                  <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-t-secondary hover:text-t-primary text-sm font-medium py-1 transition-colors">
+                    {l}
+                  </a>
+                ))}
+                <a href="mailto:alexandre.arnaud@mho.ae" onClick={() => setMenuOpen(false)}
+                  className="text-accent text-sm font-semibold pt-3 border-t border-b-subtle mt-1 inline-flex items-center gap-1.5">
+                  Book a Discovery Call →
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* ══════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-accent/[0.07] blur-[120px] animate-mesh-1" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent-glow/[0.04] blur-[100px] animate-mesh-2" />
-        </div>
+        {/* Hero background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: "url('/hero-bg.png')" }}
+        />
+        {/* Gradient overlay on top of image */}
+        <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/40 to-base" />
 
-        {/* Radial glow behind text */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent/[0.06] blur-[150px] rounded-full pointer-events-none" />
+        {/* Animated mesh glows */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-accent/[0.06] blur-[120px] animate-mesh-1" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent-glow/[0.03] blur-[100px] animate-mesh-2" />
+        </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-32 pb-20">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -245,34 +218,32 @@ export default function App() {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/20 mb-8"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-t-secondary text-xs font-medium tracking-wide">AI Solutions for GCC Enterprises</span>
+              <span className="text-t-secondary text-xs font-medium tracking-wide">IT · AI · DevOps · MLOps for GCC Enterprises</span>
             </motion.div>
 
             <h1 className="text-[3.2rem] sm:text-[4rem] lg:text-[4.5rem] font-bold leading-[1.05] tracking-[-0.035em] mb-6">
-              Your Enterprise.{" "}
-              <span className="text-gradient-accent">Powered by AI.</span>
+              Technology that moves{" "}
+              <span className="text-gradient-accent">at your speed.</span>
             </h1>
 
             <p className="text-t-secondary text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              We build custom AI solutions for the Gulf's largest organizations —
-              cutting costs, eliminating manual processes, and delivering results in 30 days.
+              We deliver AI, DevOps, MLOps, and managed IT services to Gulf enterprises —
+              cutting complexity, accelerating delivery, and building systems that last.
             </p>
 
             <div className="flex gap-4 justify-center flex-wrap">
-              <Button
-                as="a" href="mailto:alexandre.arnaud@mho.ae"
-                size="lg"
-                className="bg-accent text-white font-semibold px-8 text-[0.95rem] glow-accent"
+              <a
+                href="mailto:alexandre.arnaud@mho.ae"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-3 rounded-xl text-[0.95rem] glow-accent transition-all duration-200"
               >
-                Schedule a Free POC
-              </Button>
-              <Button
-                as="a" href="#services" size="lg"
-                variant="bordered"
-                className="border-b-subtle text-t-secondary hover:border-accent hover:text-t-primary text-[0.95rem] transition-colors"
+                Start a Conversation
+              </a>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 border border-b-hover text-t-secondary hover:border-accent hover:text-t-primary px-8 py-3 rounded-xl text-[0.95rem] transition-all duration-200"
               >
-                Explore Solutions
-              </Button>
+                Our Services
+              </a>
             </div>
           </motion.div>
 
@@ -300,12 +271,17 @@ export default function App() {
       <div className="border-t border-b-subtle py-6 overflow-hidden select-none">
         <Reveal>
           <div className="text-center mb-4">
-            <span className="text-t-tertiary text-[0.7rem] font-medium tracking-[0.1em] uppercase">Trusted by leading GCC enterprises</span>
+            <span className="text-t-tertiary text-[0.7rem] font-medium tracking-[0.1em] uppercase">
+              Trusted by leading GCC enterprises
+            </span>
           </div>
         </Reveal>
         <div className="flex gap-16 animate-marquee whitespace-nowrap" style={{ width: "max-content" }}>
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span key={i} className="text-t-tertiary/50 hover:text-t-secondary text-[0.7rem] font-medium tracking-[0.15em] uppercase transition-colors duration-300 cursor-default flex items-center gap-4">
+            <span
+              key={i}
+              className="text-t-tertiary/50 hover:text-t-secondary text-[0.7rem] font-medium tracking-[0.15em] uppercase transition-colors duration-300 cursor-default flex items-center gap-4"
+            >
               <span className="text-[5px] text-b-subtle">●</span>
               {item}
             </span>
@@ -314,23 +290,21 @@ export default function App() {
       </div>
 
       {/* ══════════════════════════════════════════════════
-          STATS
+          CONTEXT BAND (replaces Stats)
       ══════════════════════════════════════════════════ */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-b-subtle rounded-2xl overflow-hidden border border-b-subtle">
             {[
-              { val: 320, suffix: "B$", label: "Projected AI impact on MENA GDP by 2030" },
-              { val: 85, suffix: "%", label: "GCC enterprises planning AI investments in 2025" },
-              { val: 30, suffix: "", label: "Days to first measurable results with our POC" },
-              { val: 1, prefix: "#", label: "Dubai ranked top smart city in the Middle East" },
+              { label: "The Gulf's fastest-growing AI market", sub: "GCC · 2025" },
+              { label: "Most enterprises still run on legacy processes", sub: "The opportunity" },
+              { label: "From discovery to live system in weeks", sub: "Our pace" },
+              { label: "Dubai — a global hub for AI adoption", sub: "Our base" },
             ].map((s, i) => (
               <Reveal key={i} delay={i * 0.08}>
-                <div className={`text-center py-8 ${i < 3 ? "lg:border-r lg:border-b-subtle" : ""}`}>
-                  <div className="text-[3rem] font-bold text-t-primary leading-none tracking-tight mb-3">
-                    <Counter value={s.val} suffix={s.suffix} prefix={s.prefix || ""} />
-                  </div>
-                  <div className="text-[0.7rem] text-t-tertiary tracking-[0.03em] uppercase leading-snug max-w-[160px] mx-auto">{s.label}</div>
+                <div className="bg-base text-center py-10 px-6 h-full flex flex-col items-center justify-center gap-2">
+                  <div className="text-t-primary text-sm font-medium leading-snug max-w-[160px] text-center">{s.label}</div>
+                  <div className="text-t-tertiary text-[0.7rem] uppercase tracking-widest">{s.sub}</div>
                 </div>
               </Reveal>
             ))}
@@ -346,19 +320,19 @@ export default function App() {
           <Reveal>
             <SectionLabel>The Problem</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold leading-tight tracking-[-0.025em] mb-10 max-w-2xl">
-              Manual processes are costing GCC enterprises millions.
+              Legacy systems and slow delivery are costing GCC enterprises their edge.
             </h2>
           </Reveal>
 
           <Reveal delay={0.1}>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
               {[
-                { num: "73%", desc: "of documents still processed manually across GCC enterprises" },
-                { num: "5-7 days", desc: "average approval cycle for routine procurement" },
-                { num: "30%", desc: "of operational time absorbed by low-value manual tasks" },
+                { label: "Manual processes", desc: "Most large enterprises in the region still handle critical workflows manually — approvals, reporting, onboarding." },
+                { label: "Slow delivery", desc: "Long development cycles and fragile infrastructure prevent teams from shipping improvements quickly." },
+                { label: "AI without strategy", desc: "Many companies experiment with AI tools in isolation, with no plan to scale or embed them into real operations." },
               ].map((s, i) => (
-                <div key={i} className="text-center sm:text-left">
-                  <div className="text-[2rem] font-bold text-t-primary tracking-tight mb-1">{s.num}</div>
+                <div key={i} className="border-l-2 border-b-subtle pl-5">
+                  <div className="text-t-primary font-semibold text-base mb-1">{s.label}</div>
                   <div className="text-sm text-t-secondary leading-relaxed">{s.desc}</div>
                 </div>
               ))}
@@ -367,12 +341,12 @@ export default function App() {
 
           <Reveal delay={0.2}>
             <div className="bg-surface border border-b-subtle border-l-4 border-l-accent rounded-2xl p-8 sm:p-10">
-              <div className="text-[3.5rem] sm:text-[4rem] font-bold text-t-primary tracking-tight leading-none mb-3">
-                $1.5M+
+              <div className="text-t-primary text-xl font-semibold mb-3">
+                The cost of inaction compounds every quarter.
               </div>
-              <p className="text-t-secondary text-lg leading-relaxed max-w-lg">
-                Average annual loss per large enterprise via manual, inefficient processes.
-                Our clients recover 500K–2M AED/year by automating just 3 core workflows.
+              <p className="text-t-secondary text-lg leading-relaxed max-w-2xl">
+                While competitors modernize, organizations stuck on manual processes and fragmented IT lose speed, talent, and market share.
+                The window to act is now — and we make it fast.
               </p>
             </div>
           </Reveal>
@@ -387,17 +361,16 @@ export default function App() {
           <Reveal className="mb-14">
             <SectionLabel>What We Do</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
-              Three capabilities, one integrated platform.
+              AI · DevOps · MLOps · IT — end to end.
             </h2>
             <p className="text-t-secondary text-lg max-w-lg">
-              From day-one document automation to long-term strategic transformation —
-              we cover the full AI journey.
+              Four integrated capabilities. One team. Built for the demands of large GCC organizations.
             </p>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SERVICES.map((svc, i) => (
-              <Reveal key={i} delay={i * 0.1} className={svc.featured ? "md:row-span-2" : ""}>
+              <Reveal key={i} delay={i * 0.08} className={svc.featured ? "md:row-span-2" : ""}>
                 <motion.div
                   whileHover={{ borderColor: C.borderHov }}
                   className={`h-full bg-surface border border-b-subtle rounded-2xl p-8 transition-all duration-300 hover:shadow-[0_0_60px_rgba(59,130,246,0.04)] ${svc.featured ? "flex flex-col justify-between" : ""}`}
@@ -432,7 +405,7 @@ export default function App() {
           <Reveal className="mb-14">
             <SectionLabel>Use Case</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight max-w-xl">
-              From 100% manual to fully automated — in 6 weeks.
+              From fragmented tooling to a fully automated operation.
             </h2>
           </Reveal>
 
@@ -442,29 +415,28 @@ export default function App() {
                 {/* Narrative */}
                 <div className="p-8 sm:p-10 lg:border-r lg:border-b-subtle">
                   <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-6">
-                    A major regional conglomerate processed hundreds of POs and supplier invoices manually each month.
-                    Frequent errors, 5–7 day approval delays, zero real-time visibility for the finance team.
+                    A regional conglomerate was running critical procurement workflows manually — approvals routed by email, documents processed by hand, no real-time visibility for the finance team.
                   </p>
                   <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-6">
-                    We deployed an AI-powered procurement dashboard with integrated OCR engine — automatic data extraction, intelligent validation rules, instant approval workflows, live spend analytics.
+                    We deployed an AI-powered procurement layer integrated with their existing ERP — automated document extraction, intelligent validation, instant approval routing, and spend dashboards.
                   </p>
                   <p className="text-t-primary text-[0.95rem] leading-relaxed font-medium">
-                    Finance team now processes 3x the volume with the same headcount. Approval time dropped from days to under 2 hours.
+                    The finance team now handles far higher volumes with the same headcount. Approval cycles went from days to hours.
                   </p>
                 </div>
 
-                {/* Metrics */}
+                {/* Outcomes */}
                 <div className="p-8 sm:p-10 flex flex-col">
                   {[
-                    { val: "−80%", label: "Reduction in document processing time" },
-                    { val: "95%+", label: "OCR extraction accuracy" },
-                    { val: "6 weeks", label: "From kickoff to full production" },
-                    { val: "500K AED", label: "Estimated annual savings (Year 1)" },
+                    { val: "Significantly faster", label: "Document processing time" },
+                    { val: "High accuracy", label: "AI extraction — Arabic & English" },
+                    { val: "Weeks, not months", label: "From kickoff to production" },
+                    { val: "Measurable savings", label: "Annualized operational cost reduction" },
                   ].map((m, i) => (
                     <div key={i} className={`flex items-start gap-4 py-5 ${i > 0 ? "border-t border-b-subtle" : ""}`}>
                       <div className="w-1 h-full min-h-[40px] bg-accent/30 rounded-full flex-shrink-0" />
                       <div>
-                        <div className="text-[1.75rem] font-bold text-t-primary tracking-tight leading-none mb-1">{m.val}</div>
+                        <div className="text-[1.4rem] font-bold text-t-primary tracking-tight leading-none mb-1">{m.val}</div>
                         <div className="text-sm text-t-tertiary">{m.label}</div>
                       </div>
                     </div>
@@ -487,7 +459,7 @@ export default function App() {
               We're not a typical IT vendor.
             </h2>
             <p className="text-t-secondary text-lg max-w-lg">
-              A Dubai-based team combining deep technical expertise with enterprise business acumen.
+              A Dubai-based team that combines deep technical expertise with enterprise business acumen.
             </p>
           </Reveal>
 
@@ -516,21 +488,18 @@ export default function App() {
           <Reveal className="text-center max-w-lg mx-auto mb-16">
             <SectionLabel center>How We Work</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em]">
-              From first call to full ROI in 90 days.
+              From first call to live system — fast.
             </h2>
           </Reveal>
 
           {/* Horizontal stepper — desktop */}
           <div className="hidden lg:block mb-16">
             <div className="relative">
-              {/* Connecting line */}
               <div className="absolute top-3 left-0 right-0 h-px bg-b-subtle" />
-
               <div className="grid grid-cols-4 gap-8">
                 {PROCESS_STEPS.map((step, i) => (
                   <Reveal key={i} delay={i * 0.15}>
                     <div className="relative">
-                      {/* Node */}
                       <div className="w-6 h-6 rounded-full bg-base border-2 border-accent flex items-center justify-center mb-6 relative z-10">
                         <div className="w-2 h-2 rounded-full bg-accent" />
                       </div>
@@ -546,9 +515,7 @@ export default function App() {
           {/* Vertical stepper — mobile */}
           <div className="lg:hidden mb-16">
             <div className="relative pl-8">
-              {/* Vertical line */}
               <div className="absolute top-0 bottom-0 left-3 w-px bg-b-subtle" />
-
               <div className="flex flex-col gap-10">
                 {PROCESS_STEPS.map((step, i) => (
                   <Reveal key={i} delay={i * 0.1}>
@@ -566,11 +533,12 @@ export default function App() {
           </div>
 
           <Reveal className="text-center">
-            <Button as="a" href="mailto:alexandre.arnaud@mho.ae"
-              size="lg"
-              className="bg-accent text-white font-semibold px-8 glow-accent">
-              Start with a 30-day proof of concept
-            </Button>
+            <a
+              href="mailto:alexandre.arnaud@mho.ae"
+              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-3 rounded-xl glow-accent transition-all duration-200"
+            >
+              Start a conversation
+            </a>
           </Reveal>
         </div>
       </section>
@@ -607,23 +575,24 @@ export default function App() {
           CTA
       ══════════════════════════════════════════════════ */}
       <section className="py-28 px-6 relative overflow-hidden">
-        {/* Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.06] blur-[150px] rounded-full pointer-events-none" />
 
         <div className="bg-surface border border-b-subtle rounded-3xl max-w-5xl mx-auto relative z-10">
           <div className="py-20 px-6 text-center">
             <Reveal>
               <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-5">
-                Ready to transform your operations?
+                Ready to modernize your operations?
               </h2>
               <p className="text-t-secondary text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-                No commitment. No lengthy proposals. Just 30 minutes to identify your
-                biggest automation opportunity — then we prove it works.
+                No lengthy RFPs. No bloated proposals. Just a direct conversation about where technology
+                can give you an edge — and a fast path to proving it.
               </p>
-              <Button as="a" href="mailto:alexandre.arnaud@mho.ae" size="lg"
-                className="bg-accent text-white font-semibold px-10 text-[1rem] glow-accent">
+              <a
+                href="mailto:alexandre.arnaud@mho.ae"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-10 py-3.5 rounded-xl text-[1rem] glow-accent transition-all duration-200"
+              >
                 Book a Discovery Call
-              </Button>
+              </a>
             </Reveal>
           </div>
         </div>
@@ -635,9 +604,11 @@ export default function App() {
       <footer className="border-t border-b-subtle px-6 py-14">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <p className="font-bold text-lg mb-3 text-t-primary">[YOUR COMPANY]</p>
+            <p className="font-extrabold text-xl tracking-[-0.04em] mb-3">
+              MHO<span className="text-accent">.AI</span>
+            </p>
             <p className="text-t-tertiary text-sm leading-relaxed max-w-xs">
-              Enterprise AI & IT solutions for the Gulf's most ambitious organizations.
+              IT · AI · DevOps · MLOps for the Gulf's most ambitious organizations.
               Based in Dubai, operating across the GCC.
             </p>
           </div>
@@ -645,8 +616,11 @@ export default function App() {
           <div>
             <h5 className="text-t-tertiary text-xs font-medium uppercase tracking-[0.08em] mb-4">Navigation</h5>
             {NAV_LINKS.map((l) => (
-              <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`}
-                className="block text-t-tertiary text-sm mb-2.5 hover:text-t-secondary transition-colors">
+              <a
+                key={l}
+                href={`#${l.toLowerCase().replace(" ", "-")}`}
+                className="block text-t-tertiary text-sm mb-2.5 hover:text-t-secondary transition-colors"
+              >
                 {l}
               </a>
             ))}
@@ -654,8 +628,10 @@ export default function App() {
 
           <div>
             <h5 className="text-t-tertiary text-xs font-medium uppercase tracking-[0.08em] mb-4">Contact</h5>
-            <a href="mailto:alexandre.arnaud@mho.ae"
-              className="text-t-tertiary text-sm hover:text-t-secondary block mb-2 transition-colors">
+            <a
+              href="mailto:alexandre.arnaud@mho.ae"
+              className="text-t-tertiary text-sm hover:text-t-secondary block mb-2 transition-colors"
+            >
               alexandre.arnaud@mho.ae
             </a>
             <p className="text-t-tertiary text-sm">Dubai, UAE</p>
@@ -663,7 +639,7 @@ export default function App() {
         </div>
 
         <div className="border-t border-b-subtle pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-t-tertiary text-xs">
-          <span>&copy; 2026 [Your Company]. All rights reserved.</span>
+          <span>&copy; 2026 MHO.AI. All rights reserved.</span>
           <span>Dubai, UAE</span>
         </div>
       </footer>
