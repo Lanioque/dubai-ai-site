@@ -1,5 +1,42 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
+
+/* ──────────────────────────────────────────────────────────
+   3D ASSET COMPONENT
+────────────────────────────────────────────────────────── */
+function Floating3DAsset({ src, alt, className }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, rotate }}
+      whileHover={{ scale: 1.15, rotate: 5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className={`${className} cursor-pointer z-10`}
+    >
+      <motion.div
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="w-full h-full"
+      >
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-contain drop-shadow-2xl transition-all duration-300"
+          style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
 
 /* ──────────────────────────────────────────────────────────
    THEME
@@ -52,27 +89,34 @@ const SERVICES = [
   {
     num: "01",
     title: "Artificial Intelligence",
-    desc: "Custom AI solutions built for your workflows — intelligent document processing, predictive analytics, LLM integrations, and AI-powered decision automation. Arabic & English, any stack.",
-    tags: ["LLM Integration", "Predictive Analytics", "Document AI", "Arabic NLP"],
-    featured: true,
+    desc: "Custom AI solutions built for your workflows — intelligent document processing, predictive analytics, and AI-powered decision automation.",
+    asset: "https://framerusercontent.com/images/kqfXy2DSH4ezWAxlYJmCnBco.png?scale-down-to=1024",
+    col: "md:col-span-1",
+    layout: "vertical",
   },
   {
     num: "02",
     title: "DevOps & Cloud",
     desc: "End-to-end DevOps pipelines, CI/CD automation, and cloud infrastructure on AWS, Azure, or GCP. We accelerate your delivery cycles without disrupting your existing teams.",
-    tags: ["CI/CD", "Kubernetes", "Cloud Migration", "Infrastructure as Code"],
+    asset: "https://framerusercontent.com/images/vB2MtWwZpfQllMWCRyLNFppKWyw.png?scale-down-to=2048",
+    col: "md:col-span-2",
+    layout: "horizontal",
   },
   {
     num: "03",
     title: "MLOps & Model Deployment",
     desc: "We operationalize your AI models — from experimentation to production. Model monitoring, retraining pipelines, versioning, and scalable serving infrastructure.",
-    tags: ["Model Serving", "Pipeline Automation", "Monitoring", "Retraining"],
+    asset: "https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=1024",
+    col: "md:col-span-2",
+    layout: "horizontal",
   },
   {
     num: "04",
-    title: "IT Strategy & Managed Services",
-    desc: "Technology advisory and managed IT for GCC enterprises. We audit your stack, align your IT roadmap with business goals, and provide ongoing support so your teams can focus on growth.",
-    tags: ["IT Audit", "Managed Services", "Roadmap", "Vendor Management"],
+    title: "IT Strategy",
+    desc: "Technology advisory and managed IT for GCC enterprises. We audit your stack, align your IT roadmap with business goals, and provide ongoing support.",
+    asset: "https://framerusercontent.com/images/mVL46B6gqgVAy2ekLtccgvaaWU.png?scale-down-to=1024",
+    col: "md:col-span-1",
+    layout: "vertical",
   },
 ];
 
@@ -396,50 +440,45 @@ export default function App() {
       <section className="relative py-28 px-6 overflow-hidden" id="services">
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="mb-14">
-            <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-              <div className="flex-1">
-                <SectionLabel>What We Do</SectionLabel>
-                <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
-                  AI · DevOps · MLOps · IT — end to end.
-                </h2>
-                <p className="text-t-secondary text-lg max-w-lg">
-                  Four integrated capabilities. One team. Built for the demands of large GCC organizations.
-                </p>
-              </div>
-              <motion.div
-                animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
-                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[160px] h-[160px] md:w-[240px] md:h-[240px] shrink-0"
-              >
-                <img src="https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=1024" alt="Complex 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
-              </motion.div>
+            <div className="text-left">
+              <SectionLabel>What We Do</SectionLabel>
+              <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
+                AI · DevOps · MLOps · IT — end to end.
+              </h2>
+              <p className="text-t-secondary text-lg max-w-lg">
+                Four integrated capabilities. One team. Built for the demands of large GCC organizations.
+              </p>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-4">
             {SERVICES.map((svc, i) => (
-              <Reveal key={i} delay={i * 0.08} className={svc.featured ? "md:row-span-2" : ""}>
+              <Reveal key={i} delay={i * 0.08} className={svc.col}>
                 <motion.div
                   whileHover={{ scale: 1.02, rotateX: -1.5, rotateY: 2 }}
                   style={{ perspective: "900px", transformStyle: "preserve-3d" }}
-                  className={`h-full bg-surface border border-b-subtle rounded-2xl p-8 cursor-default transition-all duration-300 hover:border-accent/40 hover:shadow-[0_24px_80px_rgba(0,0,0,0.5)] ${svc.featured ? "flex flex-col justify-between" : ""}`}
+                  className="relative h-full min-h-[420px] md:min-h-[480px] bg-surface border border-b-subtle rounded-2xl p-8 cursor-default transition-all duration-300 hover:border-accent/40 hover:shadow-[0_24px_80px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col justify-end group"
                 >
                   {/* Top shine */}
                   <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-t-2xl" />
-                  <div>
+
+                  {svc.layout === 'horizontal' ? (
+                    <div className="absolute top-[-10%] md:top-[10%] right-[-20%] md:right-[-10%] w-[380px] md:w-[480px] pointer-events-none opacity-80 md:opacity-100 scale-[1.1] md:scale-125 transition-transform duration-700 group-hover:scale-[1.2] md:group-hover:scale-[1.35]">
+                      <Floating3DAsset src={svc.asset} alt={svc.title} className="w-full h-full" />
+                    </div>
+                  ) : (
+                    <div className="absolute top-[-15%] md:top-[-20%] left-1/2 -translate-x-1/2 w-[300px] pointer-events-none scale-110 md:scale-125 transition-transform duration-700 group-hover:scale-125 md:group-hover:scale-150">
+                      <Floating3DAsset src={svc.asset} alt={svc.title} className="w-full h-full" />
+                    </div>
+                  )}
+
+                  <div className={`relative z-10 mt-48 md:mt-32 ${svc.layout === 'horizontal' ? 'md:w-[55%]' : ''}`}>
                     <div className="flex items-center gap-3 mb-5">
                       <span className="text-accent text-sm font-semibold">{svc.num}</span>
-                      <div className="h-px flex-1 bg-b-subtle" />
+                      <div className="h-px flex-[0_0_40px] bg-b-subtle" />
                     </div>
-                    <h3 className="text-xl font-semibold tracking-[-0.015em] mb-3">{svc.title}</h3>
-                    <p className="text-t-secondary text-[0.95rem] leading-relaxed mb-6">{svc.desc}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {svc.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 rounded-md bg-elevated text-t-tertiary text-xs font-medium">
-                        {tag}
-                      </span>
-                    ))}
+                    <h3 className="text-xl font-semibold tracking-[-0.015em] mb-3 drop-shadow-md text-t-primary">{svc.title}</h3>
+                    <p className="text-t-secondary text-[0.95rem] leading-relaxed relative z-10">{svc.desc}</p>
                   </div>
                 </motion.div>
               </Reveal>
@@ -465,13 +504,11 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* 3D Visual side */}
                 <div className="relative min-h-[240px] lg:min-h-0 overflow-hidden flex items-center justify-center bg-b-subtle/30">
-                  <motion.div
-                    animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                  <Floating3DAsset
+                    src="https://framerusercontent.com/images/vB2MtWwZpfQllMWCRyLNFppKWyw.png?scale-down-to=2048"
+                    alt="Enterprise operations 3D Object"
                     className="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]"
-                  >
-                    <img src="https://framerusercontent.com/images/vB2MtWwZpfQllMWCRyLNFppKWyw.png?scale-down-to=2048" alt="Enterprise operations 3D Object" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
-                  </motion.div>
+                  />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/40 lg:from-transparent lg:to-surface/20 pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6">
                     <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 backdrop-blur-sm text-accent text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
@@ -556,13 +593,11 @@ export default function App() {
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="text-center max-w-lg mx-auto mb-16">
             <div className="mb-8 flex justify-center">
-              <motion.div
-                animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              <Floating3DAsset
+                src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=1024"
+                alt="Abstract 3D Shape"
                 className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
-              >
-                <img src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=1024" alt="Abstract 3D Shape" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
-              </motion.div>
+              />
             </div>
             <SectionLabel center>How We Work</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em]">
@@ -651,18 +686,11 @@ export default function App() {
 
           {/* 3D Visual Left Side */}
           <div className="w-full md:w-1/3 flex justify-center py-10 md:py-0">
-            <motion.div
-              animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            <Floating3DAsset
+              src="https://framerusercontent.com/images/mVL46B6gqgVAy2ekLtccgvaaWU.png?scale-down-to=1024"
+              alt="Abstract CTA 3D icon"
               className="relative w-[180px] h-[180px] md:w-[240px] md:h-[240px]"
-            >
-              <img
-                src="https://framerusercontent.com/images/mVL46B6gqgVAy2ekLtccgvaaWU.png?scale-down-to=1024"
-                alt="Abstract CTA 3D icon"
-                className="w-full h-full object-contain drop-shadow-2xl"
-                style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
-              />
-            </motion.div>
+            />
           </div>
 
           <div className="w-full md:w-2/3 py-20 px-6 text-left border-l border-white/5">
