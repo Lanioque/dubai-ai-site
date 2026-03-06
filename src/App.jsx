@@ -193,75 +193,162 @@ export default function App() {
       {/* ══════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
-        {/* Hero background image */}
+      <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
+        {/* Background image */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{ backgroundImage: "url('/hero-bg.png')" }}
         />
-        {/* Gradient overlay on top of image */}
-        <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/40 to-base" />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-base via-base/90 to-base/70" />
+        {/* Mesh glow — right side only */}
+        <div className="absolute top-1/3 right-0 w-[700px] h-[700px] rounded-full bg-accent/[0.06] blur-[140px] pointer-events-none" />
 
-        {/* Animated mesh glows */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-accent/[0.06] blur-[120px] animate-mesh-1" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent-glow/[0.03] blur-[100px] animate-mesh-2" />
-        </div>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-32 pb-20">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-
+            {/* ── LEFT: Content ───────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/20 mb-8"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-t-secondary text-xs font-medium tracking-wide">IT · AI · DevOps · MLOps for GCC Enterprises</span>
+              {/* Label */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="text-accent text-[0.7rem] font-semibold tracking-[0.12em] uppercase mb-5"
+              >
+                Enterprise Technology · GCC
+              </motion.p>
+
+              {/* Headline */}
+              <h1 className="text-[2.9rem] sm:text-[3.5rem] lg:text-[3.8rem] font-bold leading-[1.08] tracking-[-0.03em] mb-6 text-t-primary">
+                Technology that delivers{" "}
+                <em className="not-italic text-gradient-accent">real results.</em>
+              </h1>
+
+              {/* Subtext */}
+              <p className="text-t-secondary text-[1.05rem] leading-relaxed mb-9 max-w-md">
+                AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed,
+                reliability, and a team that understands the region.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex items-center gap-4 flex-wrap mb-6">
+                <a
+                  href="mailto:alexandre.arnaud@mho.ae"
+                  className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-7 py-3 rounded-lg text-sm glow-accent transition-all duration-200"
+                >
+                  Book a Discovery Call
+                </a>
+                <a
+                  href="#services"
+                  className="inline-flex items-center gap-1.5 text-sm text-t-secondary hover:text-t-primary font-medium transition-colors group"
+                >
+                  Explore services
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </a>
+              </div>
+
+              {/* Footnote */}
+              <p className="text-t-tertiary text-xs flex items-center gap-2">
+                <span>🚀</span>
+                30-day proof of concept · No upfront commitment
+              </p>
             </motion.div>
 
-            <h1 className="text-[3.2rem] sm:text-[4rem] lg:text-[4.5rem] font-bold leading-[1.05] tracking-[-0.035em] mb-6">
-              Technology that moves{" "}
-              <span className="text-gradient-accent">at your speed.</span>
-            </h1>
-
-            <p className="text-t-secondary text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              We deliver AI, DevOps, MLOps, and managed IT services to Gulf enterprises —
-              cutting complexity, accelerating delivery, and building systems that last.
-            </p>
-
-            <div className="flex gap-4 justify-center flex-wrap">
-              <a
-                href="mailto:alexandre.arnaud@mho.ae"
-                className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-3 rounded-xl text-[0.95rem] glow-accent transition-all duration-200"
-              >
-                Start a Conversation
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center gap-2 border border-b-hover text-t-secondary hover:border-accent hover:text-t-primary px-8 py-3 rounded-xl text-[0.95rem] transition-all duration-200"
-              >
-                Our Services
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          >
+            {/* ── RIGHT: Floating demo card ─────────────── */}
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-5 h-8 rounded-full border border-b-subtle flex items-start justify-center pt-1.5"
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative"
             >
-              <div className="w-1 h-2 rounded-full bg-t-tertiary" />
+              {/* Outer glow halo */}
+              <div className="absolute -inset-6 bg-accent/[0.04] blur-2xl rounded-3xl pointer-events-none" />
+
+              {/* Main card */}
+              <div className="relative bg-surface border border-b-subtle rounded-2xl p-5 shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+
+                {/* Top row — like a search bar */}
+                <div className="flex items-center gap-2.5 bg-elevated border border-b-subtle rounded-lg px-3 py-2.5 mb-4">
+                  <svg className="w-3.5 h-3.5 text-t-tertiary flex-shrink-0" fill="none" viewBox="0 0 16 16">
+                    <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.3" />
+                    <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                  <span className="text-t-tertiary text-xs">Active workflow</span>
+                  <span className="ml-auto flex items-center gap-1 text-[0.65rem] text-emerald-400 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Live
+                  </span>
+                </div>
+
+                {/* Workflow result card */}
+                <div className="bg-elevated border border-b-subtle rounded-xl p-4 mb-3 hover:border-accent/30 transition-all duration-300 cursor-default">
+                  <div className="flex items-start gap-3">
+                    {/* Icon */}
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 20 20">
+                        <path d="M4 5h12M4 10h8M4 15h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="text-t-primary text-sm font-semibold">Document AI Pipeline</span>
+                        <span className="text-accent text-[0.65rem] font-medium bg-accent/10 px-1.5 py-0.5 rounded">AI</span>
+                      </div>
+                      <span className="text-t-tertiary text-xs">Automated extraction · Arabic & English</span>
+                      <div className="flex items-center gap-3 mt-2 text-[0.67rem] text-t-tertiary">
+                        <span>⚙ Processing</span>
+                        <span>·</span>
+                        <span>↑ 98% accuracy</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Second mini card */}
+                <div className="bg-elevated border border-b-subtle rounded-xl p-4 mb-4 hover:border-accent/30 transition-all duration-300 cursor-default">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 20 20">
+                        <path d="M10 3v4M10 13v4M3 10h4M13 10h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                        <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="text-t-primary text-sm font-semibold">MLOps Deployment</span>
+                        <span className="text-purple-400 text-[0.65rem] font-medium bg-purple-500/10 px-1.5 py-0.5 rounded">MLOps</span>
+                      </div>
+                      <span className="text-t-tertiary text-xs">Model serving · Auto retraining</span>
+                      <div className="flex items-center gap-3 mt-2 text-[0.67rem] text-t-tertiary">
+                        <span>✓ In production</span>
+                        <span>·</span>
+                        <span>↓ Latency p99 &lt; 80ms</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Service pills */}
+                <div className="flex flex-wrap gap-2">
+                  {["AI & LLMs", "DevOps", "MLOps", "Managed IT"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1.5 text-[0.68rem] font-medium text-t-secondary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-accent/60" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+
+          </div>
         </div>
       </section>
 
