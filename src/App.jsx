@@ -310,126 +310,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* ══════════════
-          PLATFORM PREVIEWS
-      ══════════════ */}
-      <section className="py-24 px-6 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <Reveal className="text-center mb-14">
-            <SectionLabel center>The Platform</SectionLabel>
-            <h2 className="text-[2.4rem] sm:text-[2.8rem] font-bold tracking-[-0.025em] leading-tight mb-4">
-              Tools built for enterprise scale.
-            </h2>
-            <p className="text-t-secondary text-lg max-w-lg mx-auto">
-              A unified platform for AI, MLOps, and DevOps — from first model to full production.
-            </p>
-          </Reveal>
 
-          <div className="flex flex-col gap-20">
-            {/* Row 1: AI Dashboard — large, slightly tilted */}
-            <Reveal>
-              <div className="relative" style={{ perspective: "1200px" }}>
-                <motion.div
-                  whileHover={{ rotateX: -2, rotateY: 3, scale: 1.01 }}
-                  style={{ transformStyle: "preserve-3d" }}
-                  className="relative"
-                >
-                  <div className="absolute -inset-10 bg-accent/[0.06] blur-[80px] rounded-full pointer-events-none" />
-                  <div className="flex items-start gap-8 lg:gap-16">
-                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
-                      <span className="text-accent text-xs font-semibold tracking-widest uppercase mb-3 block">AI Analytics</span>
-                      <h3 className="text-2xl font-bold tracking-tight mb-3">Real-time model monitoring</h3>
-                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Track inference latency, accuracy drift, and pipeline health across all your deployed models from a single pane.</p>
-                      <div className="flex flex-wrap gap-2">
-                        {["Model Tracking", "Drift Detection", "Live Metrics"].map(t => (
-                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
-                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/analytics</span>
-                      </div>
-                      <img src="https://framerusercontent.com/images/iwHrfxAaaKPAVqil6cZS1VwIzg.png?scale-down-to=2048" alt="AI Analytics Dashboard" className="w-full block" />
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </Reveal>
-
-            {/* Row 2: MLOps — right-aligned */}
-            <Reveal>
-              <div className="relative" style={{ perspective: "1200px" }}>
-                <motion.div
-                  whileHover={{ rotateX: -2, rotateY: -3, scale: 1.01 }}
-                  style={{ transformStyle: "preserve-3d" }}
-                  className="relative"
-                >
-                  <div className="absolute -inset-10 bg-purple-600/[0.06] blur-[80px] rounded-full pointer-events-none" />
-                  <div className="flex items-start gap-8 lg:gap-16 flex-row-reverse">
-                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
-                      <span className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-3 block">MLOps</span>
-                      <h3 className="text-2xl font-bold tracking-tight mb-3">Model health monitoring</h3>
-                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Detect data drift, monitor prediction quality, and manage the full ML lifecycle from training to production deployment.</p>
-                      <div className="flex flex-wrap gap-2">
-                        {["Data Drift", "Auto Retraining", "Model Registry"].map(t => (
-                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
-                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/mlops</span>
-                      </div>
-                      <img src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=2048" alt="MLOps Dashboard" className="w-full block" />
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </Reveal>
-
-            {/* Row 3: DevOps — left */}
-            <Reveal>
-              <div className="relative" style={{ perspective: "1200px" }}>
-                <motion.div
-                  whileHover={{ rotateX: -2, rotateY: 3, scale: 1.01 }}
-                  style={{ transformStyle: "preserve-3d" }}
-                  className="relative"
-                >
-                  <div className="absolute -inset-10 bg-emerald-600/[0.05] blur-[80px] rounded-full pointer-events-none" />
-                  <div className="flex items-start gap-8 lg:gap-16">
-                    <div className="flex-shrink-0 w-72 pt-4 hidden lg:block">
-                      <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3 block">DevOps</span>
-                      <h3 className="text-2xl font-bold tracking-tight mb-3">CI/CD pipelines at a glance</h3>
-                      <p className="text-t-secondary text-sm leading-relaxed mb-5">Full visibility into every deployment. Real-time stage tracking, terminal logs, and environment health — all in one view.</p>
-                      <div className="flex flex-wrap gap-2">
-                        {["Pipeline Runs", "Deploy Logs", "Env Status"].map(t => (
-                          <span key={t} className="text-[0.65rem] font-medium text-t-tertiary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex-1 relative rounded-xl overflow-hidden" style={{ boxShadow: "0 32px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset" }}>
-                      <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                        <span className="ml-2 text-[0.6rem] text-white/25 font-mono">app.mho.ai/devops</span>
-                      </div>
-                      <img src="https://framerusercontent.com/images/WFawVIlNEWfL6BADVWkWGjETo80.png?scale-down-to=2048" alt="DevOps Pipeline" className="w-full block" />
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════
           CONTEXT BAND (replaces Stats)
@@ -462,7 +343,7 @@ export default function App() {
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[5%] w-[120px] h-[120px] md:w-[200px] md:h-[200px] pointer-events-none opacity-30 mix-blend-screen"
+          className="absolute top-[10%] left-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-30 mix-blend-screen"
         >
           <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
@@ -526,7 +407,7 @@ export default function App() {
         <motion.div
           animate={{ y: [0, 15, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] right-[3%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] pointer-events-none opacity-40 mix-blend-screen"
+          className="absolute top-[20%] right-[3%] w-[60px] h-[60px] md:w-[100px] md:h-[100px] pointer-events-none opacity-40 mix-blend-screen"
         >
           <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
@@ -681,7 +562,7 @@ export default function App() {
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 15, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[10%] left-[5%] w-[150px] h-[150px] md:w-[250px] md:h-[250px] pointer-events-none opacity-20 mix-blend-screen"
+          className="absolute bottom-[10%] left-[5%] w-[90px] h-[90px] md:w-[140px] md:h-[140px] pointer-events-none opacity-20 mix-blend-screen"
         >
           <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
@@ -777,7 +658,7 @@ export default function App() {
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] right-[10%] w-[120px] h-[120px] md:w-[180px] md:h-[180px] pointer-events-none opacity-40 mix-blend-screen"
+          className="absolute top-[15%] right-[10%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-40 mix-blend-screen"
         >
           <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
