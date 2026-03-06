@@ -231,10 +231,10 @@ export default function App() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-60 mix-blend-screen"
+            className="w-full h-full object-cover opacity-70 grayscale mix-blend-screen"
             src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4"
           />
-          <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
           {/* Top/bottom gradient fades to blend with the rest of the page */}
           <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
         </div>
