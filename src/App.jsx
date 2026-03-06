@@ -402,7 +402,7 @@ export default function App() {
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                <img src="https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=1024" alt="Complex 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel>What We Do</SectionLabel>
@@ -468,7 +468,7 @@ export default function App() {
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                     className="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]"
                   >
-                    <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Enterprise operations 3D Torus" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                    <img src="https://framerusercontent.com/images/vB2MtWwZpfQllMWCRyLNFppKWyw.png?scale-down-to=2048" alt="Enterprise operations 3D Object" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
                   </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/40 lg:from-transparent lg:to-surface/20 pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6">
@@ -555,11 +555,11 @@ export default function App() {
           <Reveal className="text-center max-w-lg mx-auto mb-16">
             <div className="mb-8 flex justify-center">
               <motion.div
-                animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                <img src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=1024" alt="Abstract 3D Shape" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel center>How We Work</SectionLabel>
@@ -655,8 +655,8 @@ export default function App() {
               className="relative w-[180px] h-[180px] md:w-[240px] md:h-[240px]"
             >
               <img
-                src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png"
-                alt="Cone 3D icon"
+                src="https://framerusercontent.com/images/mVL46B6gqgVAy2ekLtccgvaaWU.png?scale-down-to=1024"
+                alt="Abstract CTA 3D icon"
                 className="w-full h-full object-contain drop-shadow-2xl"
                 style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }}
               />
