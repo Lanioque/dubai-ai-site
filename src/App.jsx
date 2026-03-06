@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 /* ──────────────────────────────────────────────────────────
    THEME
@@ -111,9 +111,37 @@ const NAV_LINKS = ["Services", "Use Cases", "Process", "Industries"];
 /* ──────────────────────────────────────────────────────────
    APP
 ────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   3D CARD HOOK
+────────────────────────────────────────────────────────── */
+function use3DTilt() {
+  const ref = useRef(null);
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [14, -14]), { stiffness: 280, damping: 30 });
+  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-14, 14]), { stiffness: 280, damping: 30 });
+  const shineX = useTransform(rawX, [-0.5, 0.5], ["120%", "-20%"]);
+  const shineY = useTransform(rawY, [-0.5, 0.5], ["120%", "-20%"]);
+
+  const onMove = useCallback((e) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    rawX.set((e.clientX - rect.left) / rect.width - 0.5);
+    rawY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }, [rawX, rawY]);
+
+  const onLeave = useCallback(() => {
+    rawX.set(0);
+    rawY.set(0);
+  }, [rawX, rawY]);
+
+  return { ref, rotateX, rotateY, shineX, shineY, onMove, onLeave };
+}
+
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const tilt = use3DTilt();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -194,15 +222,43 @@ export default function App() {
           HERO
       ══════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
-        {/* Background image */}
+
+        {/* ── Backgrounds ── */}
+        {/* Unsplash: dark abstract tech/network */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: "url('/hero-bg.png')" }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&q=80&auto=format&fit=crop')",
+            opacity: 0.08,
+          }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-base via-base/90 to-base/70" />
-        {/* Mesh glow — right side only */}
-        <div className="absolute top-1/3 right-0 w-[700px] h-[700px] rounded-full bg-accent/[0.06] blur-[140px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-base via-base/95 to-base/80" />
+
+        {/* Dot grid */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #3B82F6 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        {/* Floating orbs — layered at different depths */}
+        <motion.div
+          animate={{ y: [0, -28, 0], x: [0, 12, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.07] blur-[130px] pointer-events-none"
+        />
+        <motion.div
+          animate={{ y: [0, 20, 0], x: [0, -15, 0] }}
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-purple-600/[0.05] blur-[110px] pointer-events-none"
+        />
+        <motion.div
+          animate={{ y: [0, 15, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-1/2 left-1/2 w-[300px] h-[300px] rounded-full bg-accent/[0.04] blur-[80px] pointer-events-none"
+        />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -213,7 +269,6 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              {/* Label */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -223,19 +278,16 @@ export default function App() {
                 Enterprise Technology · GCC
               </motion.p>
 
-              {/* Headline */}
               <h1 className="text-[2.9rem] sm:text-[3.5rem] lg:text-[3.8rem] font-bold leading-[1.08] tracking-[-0.03em] mb-6 text-t-primary">
                 Technology that delivers{" "}
                 <em className="not-italic text-gradient-accent">real results.</em>
               </h1>
 
-              {/* Subtext */}
               <p className="text-t-secondary text-[1.05rem] leading-relaxed mb-9 max-w-md">
                 AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed,
                 reliability, and a team that understands the region.
               </p>
 
-              {/* CTAs */}
               <div className="flex items-center gap-4 flex-wrap mb-6">
                 <a
                   href="mailto:alexandre.arnaud@mho.ae"
@@ -252,100 +304,193 @@ export default function App() {
                 </a>
               </div>
 
-              {/* Footnote */}
               <p className="text-t-tertiary text-xs flex items-center gap-2">
                 <span>🚀</span>
                 30-day proof of concept · No upfront commitment
               </p>
             </motion.div>
 
-            {/* ── RIGHT: Floating demo card ─────────────── */}
+            {/* ── RIGHT: 3D card ─────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative"
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative hidden lg:block"
+              style={{ perspective: "1200px" }}
             >
-              {/* Outer glow halo */}
-              <div className="absolute -inset-6 bg-accent/[0.04] blur-2xl rounded-3xl pointer-events-none" />
+              {/* Levitation float wrapper */}
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {/* 3D tilt wrapper */}
+                <motion.div
+                  ref={tilt.ref}
+                  onMouseMove={tilt.onMove}
+                  onMouseLeave={tilt.onLeave}
+                  style={{
+                    rotateX: tilt.rotateX,
+                    rotateY: tilt.rotateY,
+                    transformStyle: "preserve-3d",
+                  }}
+                  className="relative cursor-default"
+                >
+                  {/* Outer glow */}
+                  <div className="absolute -inset-4 bg-accent/[0.08] blur-2xl rounded-3xl pointer-events-none" />
 
-              {/* Main card */}
-              <div className="relative bg-surface border border-b-subtle rounded-2xl p-5 shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+                  {/* Card body */}
+                  <div
+                    className="relative rounded-2xl border border-white/10 overflow-hidden"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(17,17,19,0.98) 0%, rgba(24,24,27,0.95) 100%)",
+                      boxShadow: "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06) inset",
+                    }}
+                  >
+                    {/* Specular shine layer — follows mouse */}
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none rounded-2xl z-20"
+                      style={{
+                        background: "radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.06) 0%, transparent 65%)",
+                      }}
+                    />
+                    {/* Top shine bar */}
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-                {/* Top row — like a search bar */}
-                <div className="flex items-center gap-2.5 bg-elevated border border-b-subtle rounded-lg px-3 py-2.5 mb-4">
-                  <svg className="w-3.5 h-3.5 text-t-tertiary flex-shrink-0" fill="none" viewBox="0 0 16 16">
-                    <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.3" />
-                    <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                  </svg>
-                  <span className="text-t-tertiary text-xs">Active workflow</span>
-                  <span className="ml-auto flex items-center gap-1 text-[0.65rem] text-emerald-400 font-medium">
+                    <div className="p-5 relative z-10">
+                      {/* Status bar */}
+                      <div
+                        className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 mb-4"
+                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                      >
+                        <svg className="w-3.5 h-3.5 text-t-tertiary flex-shrink-0" fill="none" viewBox="0 0 16 16">
+                          <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.3" />
+                          <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                        </svg>
+                        <span className="text-t-tertiary text-xs">Active workflows</span>
+                        <span className="ml-auto flex items-center gap-1.5 text-[0.65rem] text-emerald-400 font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          Live
+                        </span>
+                      </div>
+
+                      {/* Card 1 — AI pipeline */}
+                      <motion.div
+                        whileHover={{ scale: 1.01, borderColor: "rgba(59,130,246,0.4)" }}
+                        className="rounded-xl p-4 mb-3 transition-all duration-300"
+                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transform: "translateZ(20px)" }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                            style={{ background: "rgba(59,130,246,0.12)", border: "1px solid rgba(59,130,246,0.25)" }}
+                          >
+                            <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 20 20">
+                              <path d="M4 5h12M4 10h8M4 15h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                            </svg>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-0.5">
+                              <span className="text-t-primary text-sm font-semibold">Document AI Pipeline</span>
+                              <span className="text-accent text-[0.62rem] font-semibold bg-accent/10 px-1.5 py-0.5 rounded">AI</span>
+                            </div>
+                            <span className="text-t-tertiary text-xs">Auto extraction · Arabic & English</span>
+                            <div className="flex items-center gap-2 mt-2">
+                              <div className="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
+                                <motion.div
+                                  initial={{ width: "0%" }}
+                                  animate={{ width: "87%" }}
+                                  transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
+                                  className="h-full rounded-full bg-accent"
+                                />
+                              </div>
+                              <span className="text-[0.62rem] text-accent font-medium">87%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      {/* Card 2 — MLOps */}
+                      <motion.div
+                        whileHover={{ scale: 1.01, borderColor: "rgba(168,85,247,0.4)" }}
+                        className="rounded-xl p-4 mb-4 transition-all duration-300"
+                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transform: "translateZ(14px)" }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                            style={{ background: "rgba(168,85,247,0.1)", border: "1px solid rgba(168,85,247,0.2)" }}
+                          >
+                            <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 20 20">
+                              <path d="M10 3v4M10 13v4M3 10h4M13 10h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                              <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-0.5">
+                              <span className="text-t-primary text-sm font-semibold">MLOps Deployment</span>
+                              <span className="text-purple-400 text-[0.62rem] font-semibold bg-purple-500/10 px-1.5 py-0.5 rounded">MLOps</span>
+                            </div>
+                            <span className="text-t-tertiary text-xs">Model serving · Auto retraining</span>
+                            <div className="flex items-center gap-3 mt-2 text-[0.62rem] text-t-tertiary">
+                              <span className="text-emerald-400">✓ In production</span>
+                              <span>· Fast inference</span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      {/* Pills row */}
+                      <div className="flex flex-wrap gap-1.5" style={{ transform: "translateZ(8px)" }}>
+                        {["AI & LLMs", "DevOps", "MLOps", "Managed IT"].map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center gap-1.5 text-[0.65rem] font-medium text-t-secondary px-2.5 py-1 rounded-full"
+                            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                          >
+                            <span className="w-1 h-1 rounded-full bg-accent/70" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating badge — top right, separate depth layer */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="absolute -top-4 -right-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400"
+                    style={{
+                      background: "rgba(16,24,22,0.95)",
+                      border: "1px solid rgba(52,211,153,0.3)",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                      transform: "translateZ(40px)",
+                    }}
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Live
-                  </span>
-                </div>
+                    Systems operational
+                  </motion.div>
 
-                {/* Workflow result card */}
-                <div className="bg-elevated border border-b-subtle rounded-xl p-4 mb-3 hover:border-accent/30 transition-all duration-300 cursor-default">
-                  <div className="flex items-start gap-3">
-                    {/* Icon */}
-                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 20 20">
-                        <path d="M4 5h12M4 10h8M4 15h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-t-primary text-sm font-semibold">Document AI Pipeline</span>
-                        <span className="text-accent text-[0.65rem] font-medium bg-accent/10 px-1.5 py-0.5 rounded">AI</span>
-                      </div>
-                      <span className="text-t-tertiary text-xs">Automated extraction · Arabic & English</span>
-                      <div className="flex items-center gap-3 mt-2 text-[0.67rem] text-t-tertiary">
-                        <span>⚙ Processing</span>
-                        <span>·</span>
-                        <span>↑ 98% accuracy</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  {/* Floating badge — bottom left */}
+                  <motion.div
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                    className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-accent"
+                    style={{
+                      background: "rgba(9,9,11,0.95)",
+                      border: "1px solid rgba(59,130,246,0.3)",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                      transform: "translateZ(40px)",
+                    }}
+                  >
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                      <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    New deployment ready
+                  </motion.div>
 
-                {/* Second mini card */}
-                <div className="bg-elevated border border-b-subtle rounded-xl p-4 mb-4 hover:border-accent/30 transition-all duration-300 cursor-default">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 20 20">
-                        <path d="M10 3v4M10 13v4M3 10h4M13 10h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                        <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-0.5">
-                        <span className="text-t-primary text-sm font-semibold">MLOps Deployment</span>
-                        <span className="text-purple-400 text-[0.65rem] font-medium bg-purple-500/10 px-1.5 py-0.5 rounded">MLOps</span>
-                      </div>
-                      <span className="text-t-tertiary text-xs">Model serving · Auto retraining</span>
-                      <div className="flex items-center gap-3 mt-2 text-[0.67rem] text-t-tertiary">
-                        <span>✓ In production</span>
-                        <span>·</span>
-                        <span>↓ Latency p99 &lt; 80ms</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Service pills */}
-                <div className="flex flex-wrap gap-2">
-                  {["AI & LLMs", "DevOps", "MLOps", "Managed IT"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-1.5 text-[0.68rem] font-medium text-t-secondary bg-elevated border border-b-subtle px-2.5 py-1 rounded-full"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-accent/60" />
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
 
           </div>
