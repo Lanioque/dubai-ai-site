@@ -402,7 +402,7 @@ export default function App() {
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel>What We Do</SectionLabel>
@@ -468,7 +468,7 @@ export default function App() {
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                     className="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]"
                   >
-                    <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Enterprise operations 3D Cube" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                    <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Enterprise operations 3D Torus" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
                   </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface/40 lg:from-transparent lg:to-surface/20 pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6">
@@ -559,7 +559,7 @@ export default function App() {
                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
               >
-                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
+                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
             <SectionLabel center>How We Work</SectionLabel>
