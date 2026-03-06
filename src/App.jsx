@@ -219,195 +219,100 @@ export default function App() {
       </header>
 
       {/* ══════════════════════════════════════════════════
+      {/* ══════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden" id="hero">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden" id="hero">
 
-        {/* ── Backgrounds ── */}
-        {/* Landio ripple dark background */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://framerusercontent.com/images/W7xYkGKzPzvnPv58ZBNzxS3JZI.jpg?width=1920')",
-            opacity: 0.18,
-          }}
-        />
-        {/* AI-Kit glow pattern */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://framerusercontent.com/images/5AXsK3MyGYovv57LsfY0T3kRQU.png')",
-            opacity: 0.35,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/80 to-base" />
+        {/* ── Video Background ── */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-60 mix-blend-screen"
+            src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4"
+          />
+          {/* Top/bottom gradient fades to blend with the rest of the page */}
+          <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
+        </div>
 
-        {/* Floating glows */}
+        {/* AI-Kit 3D shapes — decorative floating elements */}
+        {/* Top left torus */}
         <motion.div
-          animate={{ y: [0, -28, 0], x: [0, 12, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/[0.08] blur-[140px] pointer-events-none"
-        />
-        <motion.div
-          animate={{ y: [0, 20, 0], x: [0, -15, 0] }}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-600/[0.07] blur-[120px] pointer-events-none"
-        />
-
-        {/* AI-Kit 3D glass torus — decorative floating element top-right */}
-        <motion.div
-          animate={{ y: [0, -18, 0], rotate: [0, 8, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-12 -right-12 w-[280px] h-[280px] pointer-events-none opacity-30 hidden xl:block"
+          animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[15%] left-[10%] w-[140px] h-[140px] md:w-[220px] md:h-[220px] pointer-events-none opacity-40 mix-blend-screen"
         >
-          <img src="https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=2048" alt="" className="w-full h-full object-contain" />
+          <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
 
-        {/* AI-Kit 3D glass cone — bottom-left */}
+        {/* Bottom right cone */}
         <motion.div
-          animate={{ y: [0, 14, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-          className="absolute bottom-8 left-4 w-[180px] h-[180px] pointer-events-none opacity-20 hidden xl:block"
+          animate={{ y: [0, 20, 0], rotate: [0, -15, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-[20%] right-[10%] w-[120px] h-[120px] md:w-[180px] md:h-[180px] pointer-events-none opacity-40 mix-blend-screen"
         >
-          <img src="https://framerusercontent.com/images/07KtB00iioo573QNsZnQtSvK0Ro.png?scale-down-to=512" alt="" className="w-full h-full object-contain" />
+          <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="" className="w-full h-full object-contain" />
         </motion.div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        {/* Upper right sphere */}
+        <motion.div
+          animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[25%] right-[20%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-30 mix-blend-screen hidden md:block"
+        >
+          <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="" className="w-full h-full object-contain" />
+        </motion.div>
 
-            {/* ── LEFT: Content ───────────────────────────── */}
+        {/* ── Centered Content ── */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center mt-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex flex-col items-center"
+          >
+            {/* Pill label */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
             >
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.5 }}
-                className="text-accent text-[0.7rem] font-semibold tracking-[0.12em] uppercase mb-5"
-              >
-                Enterprise Technology · GCC
-              </motion.p>
-
-              <h1 className="text-[2.9rem] sm:text-[3.5rem] lg:text-[3.8rem] font-bold leading-[1.08] tracking-[-0.03em] mb-6 text-t-primary">
-                Technology that delivers{" "}
-                <em className="not-italic text-gradient-accent">real results.</em>
-              </h1>
-
-              <p className="text-t-secondary text-[1.05rem] leading-relaxed mb-9 max-w-md">
-                AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed,
-                reliability, and a team that understands the region.
-              </p>
-
-              <div className="flex items-center gap-4 flex-wrap mb-6">
-                <a
-                  href="mailto:alexandre.arnaud@mho.ae"
-                  className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-7 py-3 rounded-lg text-sm glow-accent transition-all duration-200"
-                >
-                  Book a Discovery Call
-                </a>
-                <a
-                  href="#services"
-                  className="inline-flex items-center gap-1.5 text-sm text-t-secondary hover:text-t-primary font-medium transition-colors group"
-                >
-                  Explore services
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                </a>
-              </div>
-
-              <p className="text-t-tertiary text-xs flex items-center gap-2">
-                <span>🚀</span>
-                30-day proof of concept · No upfront commitment
-              </p>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-[0.65rem] font-medium tracking-[0.1em] text-t-secondary uppercase">
+                New Gen AI Automation Partner
+              </span>
             </motion.div>
 
-            {/* ── RIGHT: Dashboard screenshot in 3D browser frame ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative hidden lg:block"
-              style={{ perspective: "1400px" }}
-            >
-              {/* Levitation */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            {/* Headline */}
+            <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.04em] mb-6 text-t-primary">
+              Automate Smarter.<br /> Grow Faster.{" "}
+              <em className="font-serif italic font-normal text-t-secondary">With AI.</em>
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-t-secondary text-base sm:text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+              AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed, reliability, and modern automation made simple.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex items-center justify-center gap-4 flex-wrap w-full">
+              <a
+                href="mailto:alexandre.arnaud@mho.ae"
+                className="group relative inline-flex items-center justify-center gap-2 bg-white text-base hover:bg-white/90 font-semibold px-8 py-3.5 rounded-full text-sm transition-all duration-300 overflow-hidden"
               >
-                {/* 3D tilt on mouse */}
-                <motion.div
-                  ref={tilt.ref}
-                  onMouseMove={tilt.onMove}
-                  onMouseLeave={tilt.onLeave}
-                  style={{ rotateX: tilt.rotateX, rotateY: tilt.rotateY, transformStyle: "preserve-3d" }}
-                  className="relative cursor-default"
-                >
-                  {/* Ambient glow */}
-                  <div className="absolute -inset-8 bg-accent/[0.12] blur-[60px] rounded-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] animate-shimmer" />
+                <span className="relative z-10 text-base">Book A Free Call</span>
+                <svg className="w-4 h-4 ml-1 relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+              </a>
+            </div>
 
-                  {/* Browser chrome frame */}
-                  <div
-                    className="relative rounded-xl overflow-hidden"
-                    style={{
-                      boxShadow: "0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08) inset, 0 0 0 1px rgba(255,255,255,0.04)",
-                    }}
-                  >
-                    {/* Title bar */}
-                    <div
-                      className="flex items-center gap-2 px-4 py-3"
-                      style={{ background: "#161B2A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-                    >
-                      <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-                      <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-                      <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-                      <div
-                        className="ml-3 flex-1 rounded-md px-3 py-1 text-[0.65rem] text-white/30 font-mono"
-                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
-                      >
-                        app.mho.ai/dashboard
-                      </div>
-                    </div>
-                    {/* AI-Kit real dashboard screenshot from Framerusercontent CDN */}
-                    <img
-                      src="https://framerusercontent.com/images/iwHrfxAaaKPAVqil6cZS1VwIzg.png?scale-down-to=2048"
-                      alt="MHO.AI Dashboard"
-                      className="w-full block"
-                      style={{ maxHeight: "380px", objectFit: "cover", objectPosition: "top" }}
-                    />
-                    {/* Bottom shimmer */}
-                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-base/80 to-transparent" />
-                  </div>
-
-                  {/* Floating badge — top right */}
-                  <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute -top-4 -right-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400"
-                    style={{ background: "rgba(16,24,22,0.96)", border: "1px solid rgba(52,211,153,0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.5)", transform: "translateZ(40px)" }}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    All systems live
-                  </motion.div>
-
-                  {/* Floating badge — bottom left */}
-                  <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute -bottom-3 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-accent"
-                    style={{ background: "rgba(9,9,11,0.96)", border: "1px solid rgba(59,130,246,0.35)", boxShadow: "0 8px 24px rgba(0,0,0,0.5)", transform: "translateZ(40px)" }}
-                  >
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                      <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                    New model deployed
-                  </motion.div>
-
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -579,8 +484,17 @@ export default function App() {
       {/* ══════════════
           PROBLEM
       ══════════════ */}
-      <section className="py-28 px-6" id="problem">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative py-28 px-6 overflow-hidden" id="problem">
+        {/* Decorative 3D Cube */}
+        <motion.div
+          animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[5%] w-[120px] h-[120px] md:w-[200px] md:h-[200px] pointer-events-none opacity-30 mix-blend-screen"
+        >
+          <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="" className="w-full h-full object-contain" />
+        </motion.div>
+
+        <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal>
             <SectionLabel>The Problem</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold leading-tight tracking-[-0.025em] mb-10 max-w-2xl">
@@ -634,8 +548,17 @@ export default function App() {
       {/* ══════════════
           SERVICES
       ══════════════ */}
-      <section className="py-28 px-6" id="services">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative py-28 px-6 overflow-hidden" id="services">
+        {/* Decorative 3D Sphere */}
+        <motion.div
+          animate={{ y: [0, 15, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] right-[3%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] pointer-events-none opacity-40 mix-blend-screen"
+        >
+          <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="" className="w-full h-full object-contain" />
+        </motion.div>
+
+        <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="mb-14">
             <SectionLabel>What We Do</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
@@ -780,8 +703,17 @@ export default function App() {
       {/* ══════════════
           PROCESS
       ══════════════ */}
-      <section className="py-28 px-6" id="process">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative py-28 px-6 overflow-hidden" id="process">
+        {/* Decorative 3D Torus */}
+        <motion.div
+          animate={{ y: [0, -20, 0], rotate: [0, 15, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[10%] left-[5%] w-[150px] h-[150px] md:w-[250px] md:h-[250px] pointer-events-none opacity-20 mix-blend-screen"
+        >
+          <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="" className="w-full h-full object-contain" />
+        </motion.div>
+
+        <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="text-center max-w-lg mx-auto mb-16">
             <SectionLabel center>How We Work</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em]">
@@ -867,6 +799,15 @@ export default function App() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.07] blur-[150px] rounded-full pointer-events-none" />
+
+        {/* Decorative 3D Cone */}
+        <motion.div
+          animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[15%] right-[10%] w-[120px] h-[120px] md:w-[180px] md:h-[180px] pointer-events-none opacity-40 mix-blend-screen"
+        >
+          <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="" className="w-full h-full object-contain" />
+        </motion.div>
 
         <motion.div
           whileHover={{ scale: 1.005 }}
