@@ -396,22 +396,24 @@ export default function App() {
       <section className="relative py-28 px-6 overflow-hidden" id="services">
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="mb-14">
-            <div className="mb-8 block">
+            <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+              <div className="flex-1">
+                <SectionLabel>What We Do</SectionLabel>
+                <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
+                  AI · DevOps · MLOps · IT — end to end.
+                </h2>
+                <p className="text-t-secondary text-lg max-w-lg">
+                  Four integrated capabilities. One team. Built for the demands of large GCC organizations.
+                </p>
+              </div>
               <motion.div
                 animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
                 transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
+                className="relative w-[160px] h-[160px] md:w-[240px] md:h-[240px] shrink-0"
               >
                 <img src="https://framerusercontent.com/images/xzqytNjMR8W7ZxcYvm5hRGTNWw.png?scale-down-to=1024" alt="Complex 3D icon" className="w-full h-full object-contain drop-shadow-2xl" style={{ filter: "grayscale(1) sepia(1) hue-rotate(175deg) saturate(5) brightness(1.1) opacity(0.9)" }} />
               </motion.div>
             </div>
-            <SectionLabel>What We Do</SectionLabel>
-            <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
-              AI · DevOps · MLOps · IT — end to end.
-            </h2>
-            <p className="text-t-secondary text-lg max-w-lg">
-              Four integrated capabilities. One team. Built for the demands of large GCC organizations.
-            </p>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
