@@ -1,3 +1,173 @@
+# Dark Obsidian Redesign — Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Transform the website from a navy+gold theme to a premium "Dark Obsidian" aesthetic with near-black backgrounds, electric blue accent, refined typography, and polished animations.
+
+**Architecture:** Single-file SPA rewrite of App.jsx, plus updates to index.css and tailwind.config.js. No new files needed. All existing data arrays preserved, visual presentation completely reworked.
+
+**Tech Stack:** React + Vite, Tailwind CSS, HeroUI (Navbar/Button only), Framer Motion
+
+---
+
+### Task 1: Update Global Config Files
+
+**Files:**
+- Modify: `tailwind.config.js`
+- Modify: `src/index.css`
+- Modify: `index.html`
+
+**Step 1: Rewrite tailwind.config.js**
+
+Replace entire file with:
+
+```js
+const { heroui } = require("@heroui/react");
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        base:      "#09090B",
+        surface:   "#111113",
+        elevated:  "#18181B",
+        "b-subtle":"#27272A",
+        "b-hover": "#3F3F46",
+        "t-primary":  "#FAFAFA",
+        "t-secondary":"#A1A1AA",
+        "t-tertiary": "#71717A",
+        accent:    "#3B82F6",
+        "accent-glow":"#60A5FA",
+      },
+      keyframes: {
+        marquee: {
+          "0%":   { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "mesh-drift": {
+          "0%":   { transform: "translate(0, 0) scale(1)" },
+          "33%":  { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%":  { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
+        },
+        "mesh-drift-2": {
+          "0%":   { transform: "translate(0, 0) scale(1)" },
+          "33%":  { transform: "translate(-40px, 30px) scale(1.15)" },
+          "66%":  { transform: "translate(25px, -35px) scale(0.95)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
+        },
+      },
+      animation: {
+        marquee:      "marquee 45s linear infinite",
+        "mesh-1":     "mesh-drift 20s ease-in-out infinite",
+        "mesh-2":     "mesh-drift-2 25s ease-in-out infinite",
+      },
+    },
+  },
+  darkMode: "class",
+  plugins: [
+    heroui({
+      themes: {
+        dark: {
+          colors: {
+            primary:   { DEFAULT: "#3B82F6", foreground: "#FFFFFF" },
+            secondary: { DEFAULT: "#60A5FA", foreground: "#FFFFFF" },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+**Step 2: Rewrite src/index.css**
+
+Replace entire file with:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #09090B;
+    color: #FAFAFA;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #FAFAFA 30%, #60A5FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glow-accent {
+    box-shadow: 0 0 50px rgba(59, 130, 246, 0.20), 0 0 100px rgba(59, 130, 246, 0.05);
+  }
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #09090B; }
+::-webkit-scrollbar-thumb { background: #27272A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+```
+
+**Step 3: Update index.html**
+
+Remove the Space Grotesk font import — only keep Inter:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+```
+
+**Step 4: Commit**
+
+```bash
+git add tailwind.config.js src/index.css index.html
+git commit -m "chore: update config for Dark Obsidian theme"
+```
+
+---
+
+### Task 2: Rewrite Theme Constants, Utility Components & Data Arrays
+
+**Files:**
+- Modify: `src/App.jsx` (lines 1-199)
+
+**Step 1: Replace the imports, theme object, NeuralCanvas, Reveal, Counter, SectionLabel, and all data arrays**
+
+Replace lines 1-199 of App.jsx with:
+
+```jsx
 import { useEffect, useRef, useState } from "react";
 import {
   Navbar, NavbarBrand, NavbarContent, NavbarItem,
@@ -10,16 +180,16 @@ import { motion, useInView } from "framer-motion";
    THEME
 ────────────────────────────────────────────────────────── */
 const C = {
-  base: "#09090B",
-  surface: "#111113",
-  elevated: "#18181B",
-  border: "#27272A",
+  base:      "#09090B",
+  surface:   "#111113",
+  elevated:  "#18181B",
+  border:    "#27272A",
   borderHov: "#3F3F46",
-  text1: "#FAFAFA",
-  text2: "#A1A1AA",
-  text3: "#71717A",
-  accent: "#3B82F6",
-  accentGlow: "#60A5FA",
+  text1:     "#FAFAFA",
+  text2:     "#A1A1AA",
+  text3:     "#71717A",
+  accent:    "#3B82F6",
+  accentGlow:"#60A5FA",
 };
 
 /* ──────────────────────────────────────────────────────────
@@ -43,7 +213,7 @@ function Reveal({ children, delay = 0, className = "" }) {
 ────────────────────────────────────────────────────────── */
 function Counter({ value, suffix = "", prefix = "" }) {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref   = useRef(null);
   const inView = useInView(ref, { once: true });
   useEffect(() => {
     if (!inView) return;
@@ -96,40 +266,65 @@ const SERVICES = [
 ];
 
 const WHY_US = [
-  { num: "01", title: "Mixed Business + Technical Profile", desc: "We speak CFO and CTO in the same meeting. Our team bridges the gap between technical capability and business ROI — no translation needed." },
-  { num: "02", title: "Deeply Rooted in Dubai & the GCC", desc: "Local entity, local team, local network. We understand the region's business culture, procurement cycles, and decision-making dynamics." },
+  { num: "01", title: "Mixed Business + Technical Profile",  desc: "We speak CFO and CTO in the same meeting. Our team bridges the gap between technical capability and business ROI — no translation needed." },
+  { num: "02", title: "Deeply Rooted in Dubai & the GCC",   desc: "Local entity, local team, local network. We understand the region's business culture, procurement cycles, and decision-making dynamics." },
   { num: "03", title: "POC-First. Results Before Contract.", desc: "30-day proof of concept on your real data, at reduced or zero cost. You see measurable results before signing anything." },
-  { num: "04", title: "Credible Traction from Day One", desc: "We're already in active discussions with regional references. We accelerate from existing relationships and proven use cases." },
+  { num: "04", title: "Credible Traction from Day One",      desc: "We're already in active discussions with regional references. We accelerate from existing relationships and proven use cases." },
 ];
 
 const PROCESS_STEPS = [
-  { num: "01", title: "Discovery Call", desc: "30 minutes to map your biggest operational pain point and identify the highest-ROI automation opportunity." },
-  { num: "02", title: "POC Design", desc: "We design a targeted proof of concept scoped around your actual data. Clear deliverables, clear success metrics." },
+  { num: "01", title: "Discovery Call",    desc: "30 minutes to map your biggest operational pain point and identify the highest-ROI automation opportunity." },
+  { num: "02", title: "POC Design",        desc: "We design a targeted proof of concept scoped around your actual data. Clear deliverables, clear success metrics." },
   { num: "03", title: "30-Day Deployment", desc: "We build and deploy. Live results on your real workflows — measurable impact, zero disruption to your teams." },
-  { num: "04", title: "Scale & Expand", desc: "We productionize, integrate fully, and roll out to other departments. Ongoing support and optimization included." },
+  { num: "04", title: "Scale & Expand",    desc: "We productionize, integrate fully, and roll out to other departments. Ongoing support and optimization included." },
 ];
 
 const INDUSTRIES = [
-  { title: "Conglomerates", names: "Al Futtaim · MAF · Emaar" },
-  { title: "Quasi-Government", names: "DP World · DEWA · RTA" },
-  { title: "Banking & Finance", names: "Emirates NBD · FAB · Mashreq" },
-  { title: "Aviation & Logistics", names: "Emirates · Etihad · DP World" },
-  { title: "Healthcare", names: "Aster DM · Pure Health" },
-  { title: "Real Estate", names: "Aldar · Nakheel · Meraas" },
-  { title: "Energy & Utilities", names: "ENOC · DEWA · ADNOC" },
-  { title: "Retail & Luxury", names: "Chalhoub · AW Rostamani" },
+  { title: "Conglomerates",        names: "Al Futtaim · MAF · Emaar" },
+  { title: "Quasi-Government",     names: "DP World · DEWA · RTA" },
+  { title: "Banking & Finance",     names: "Emirates NBD · FAB · Mashreq" },
+  { title: "Aviation & Logistics",  names: "Emirates · Etihad · DP World" },
+  { title: "Healthcare",            names: "Aster DM · Pure Health" },
+  { title: "Real Estate",           names: "Aldar · Nakheel · Meraas" },
+  { title: "Energy & Utilities",    names: "ENOC · DEWA · ADNOC" },
+  { title: "Retail & Luxury",       names: "Chalhoub · AW Rostamani" },
 ];
 
 const MARQUEE_ITEMS = [
-  "Al Futtaim Group", "Majid Al Futtaim", "DP World", "Emirates NBD", "DEWA",
-  "Emaar Properties", "Etihad Airways", "Pure Health", "Chalhoub Group", "ENOC", "FAB", "Aldar Properties",
+  "Al Futtaim Group","Majid Al Futtaim","DP World","Emirates NBD","DEWA",
+  "Emaar Properties","Etihad Airways","Pure Health","Chalhoub Group","ENOC","FAB","Aldar Properties",
 ];
 
-const NAV_LINKS = ["Services", "Use Cases", "Process", "Industries"];
+const NAV_LINKS = ["Services","Use Cases","Process","Industries"];
+```
 
-/* ──────────────────────────────────────────────────────────
-   APP
-────────────────────────────────────────────────────────── */
+Note what changed:
+- Removed `Card`, `CardBody`, `CardHeader`, `Chip`, `Divider`, `Progress` imports (no longer needed)
+- Removed `NeuralCanvas` entirely
+- New theme object with obsidian palette
+- `SectionLabel` uses accent dot instead of gold line
+- Data arrays simplified: removed emoji icons, colors, `time` fields; added `featured` flag on first service
+- `Reveal` uses a refined easing curve
+
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "refactor: replace theme, utility components, and data arrays for Dark Obsidian"
+```
+
+---
+
+### Task 3: Rewrite the App Component — Nav + Hero + Marquee + Stats
+
+**Files:**
+- Modify: `src/App.jsx` — replace the `App` component's opening through the Stats section
+
+**Step 1: Replace from `export default function App()` through the end of the Stats section**
+
+Replace the App component opening, Nav, Hero, Marquee, and Stats sections with:
+
+```jsx
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -149,32 +344,15 @@ export default function App() {
       <Navbar
         isMenuOpen={menuOpen}
         onMenuOpenChange={setMenuOpen}
-        className={`transition-all duration-300 fixed top-0 z-50 ${scrolled
-          ? "bg-base/80 backdrop-blur-xl border-b border-b-subtle"
-          : "bg-transparent"
-          }`}
+        className={`transition-all duration-300 fixed top-0 z-50 ${
+          scrolled
+            ? "bg-base/80 backdrop-blur-xl border-b border-b-subtle"
+            : "bg-transparent"
+        }`}
         maxWidth="xl"
       >
         <NavbarContent>
-          <NavbarMenuToggle
-            className="sm:hidden text-t-primary"
-            icon={(isOpen) => (
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {isOpen ? (
-                  <>
-                    <line x1="4" y1="4" x2="16" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="16" y1="4" x2="4" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </>
-                ) : (
-                  <>
-                    <line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </>
-                )}
-              </svg>
-            )}
-          />
+          <NavbarMenuToggle className="sm:hidden text-t-primary" />
           <NavbarBrand>
             <span className="font-bold text-lg text-t-primary tracking-tight">
               [YOUR COMPANY]
@@ -320,10 +498,10 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
-              { val: 320, suffix: "B$", label: "Projected AI impact on MENA GDP by 2030" },
-              { val: 85, suffix: "%", label: "GCC enterprises planning AI investments in 2025" },
-              { val: 30, suffix: "", label: "Days to first measurable results with our POC" },
-              { val: 1, prefix: "#", label: "Dubai ranked top smart city in the Middle East" },
+              { val: 320, suffix: "B$",  label: "Projected AI impact on MENA GDP by 2030" },
+              { val: 85,  suffix: "%",   label: "GCC enterprises planning AI investments in 2025" },
+              { val: 30,  suffix: "",    label: "Days to first measurable results with our POC" },
+              { val: 1,   prefix: "#",   label: "Dubai ranked top smart city in the Middle East" },
             ].map((s, i) => (
               <Reveal key={i} delay={i * 0.08}>
                 <div className={`text-center py-8 ${i < 3 ? "lg:border-r lg:border-b-subtle" : ""}`}>
@@ -337,7 +515,25 @@ export default function App() {
           </div>
         </div>
       </section>
+```
 
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Nav, Hero, Marquee, Stats with Dark Obsidian design"
+```
+
+---
+
+### Task 4: Rewrite the Problem Section
+
+**Files:**
+- Modify: `src/App.jsx` — replace the Problem section
+
+**Step 1: Replace the Problem section with:**
+
+```jsx
       {/* ══════════════════════════════════════════════════
           PROBLEM
       ══════════════════════════════════════════════════ */}
@@ -366,7 +562,7 @@ export default function App() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="bg-surface border border-b-subtle border-l-4 border-l-accent rounded-2xl p-8 sm:p-10">
+            <div className="bg-surface border border-b-subtle rounded-2xl p-8 sm:p-10 border-l-4 border-l-accent">
               <div className="text-[3.5rem] sm:text-[4rem] font-bold text-t-primary tracking-tight leading-none mb-3">
                 $1.5M+
               </div>
@@ -378,7 +574,25 @@ export default function App() {
           </Reveal>
         </div>
       </section>
+```
 
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Problem section with minimal stat layout"
+```
+
+---
+
+### Task 5: Rewrite the Services Section (Bento Grid)
+
+**Files:**
+- Modify: `src/App.jsx` — replace the Services section
+
+**Step 1: Replace the Services section with:**
+
+```jsx
       {/* ══════════════════════════════════════════════════
           SERVICES
       ══════════════════════════════════════════════════ */}
@@ -423,7 +637,25 @@ export default function App() {
           </div>
         </div>
       </section>
+```
 
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Services as bento grid layout"
+```
+
+---
+
+### Task 6: Rewrite Use Case Section
+
+**Files:**
+- Modify: `src/App.jsx` — replace the Use Case section
+
+**Step 1: Replace the Use Case section with:**
+
+```jsx
       {/* ══════════════════════════════════════════════════
           USE CASE
       ══════════════════════════════════════════════════ */}
@@ -456,9 +688,9 @@ export default function App() {
                 {/* Metrics */}
                 <div className="p-8 sm:p-10 flex flex-col">
                   {[
-                    { val: "−80%", label: "Reduction in document processing time" },
-                    { val: "95%+", label: "OCR extraction accuracy" },
-                    { val: "6 weeks", label: "From kickoff to full production" },
+                    { val: "−80%",     label: "Reduction in document processing time" },
+                    { val: "95%+",     label: "OCR extraction accuracy" },
+                    { val: "6 weeks",  label: "From kickoff to full production" },
                     { val: "500K AED", label: "Estimated annual savings (Year 1)" },
                   ].map((m, i) => (
                     <div key={i} className={`flex items-start gap-4 py-5 ${i > 0 ? "border-t border-b-subtle" : ""}`}>
@@ -475,7 +707,25 @@ export default function App() {
           </Reveal>
         </div>
       </section>
+```
 
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Use Case with split card layout"
+```
+
+---
+
+### Task 7: Rewrite Why Us + Process Sections
+
+**Files:**
+- Modify: `src/App.jsx` — replace Why Us and Process sections
+
+**Step 1: Replace Why Us and Process with:**
+
+```jsx
       {/* ══════════════════════════════════════════════════
           WHY US
       ══════════════════════════════════════════════════ */}
@@ -574,7 +824,25 @@ export default function App() {
           </Reveal>
         </div>
       </section>
+```
 
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Why Us with numbered grid and Process with stepper"
+```
+
+---
+
+### Task 8: Rewrite Industries + CTA + Footer (and Remove FAB)
+
+**Files:**
+- Modify: `src/App.jsx` — replace Industries, CTA, Footer, FAB, and closing tags
+
+**Step 1: Replace from Industries section through end of file with:**
+
+```jsx
       {/* ══════════════════════════════════════════════════
           INDUSTRIES
       ══════════════════════════════════════════════════ */}
@@ -671,3 +939,55 @@ export default function App() {
     </div>
   );
 }
+```
+
+Note: The floating action button is completely removed.
+
+**Step 2: Commit**
+
+```bash
+git add src/App.jsx
+git commit -m "feat: rewrite Industries, CTA, Footer; remove floating action button"
+```
+
+---
+
+### Task 9: Visual QA & Polish
+
+**Step 1: Run dev server**
+
+```bash
+npm run dev
+```
+
+**Step 2: Review each section visually and fix any issues**
+
+Check for:
+- Tailwind class conflicts (especially border colors — `border-b-subtle` may conflict with `border-b` which means border-bottom)
+- Spacing inconsistencies
+- Mobile responsiveness (test at 375px, 768px, 1024px, 1440px widths)
+- Animation timing — ensure staggered reveals feel smooth
+- Color consistency — no leftover gold/navy references
+
+**Step 3: Commit fixes**
+
+```bash
+git add -A
+git commit -m "fix: visual QA and polish pass"
+```
+
+---
+
+### Summary
+
+| Task | Description | Estimated Changes |
+|------|-------------|-------------------|
+| 1 | Config files (Tailwind, CSS, HTML) | 3 files |
+| 2 | Theme, utility components, data arrays | Top of App.jsx |
+| 3 | Nav + Hero + Marquee + Stats | Main App body start |
+| 4 | Problem section | ~30 lines |
+| 5 | Services bento grid | ~40 lines |
+| 6 | Use Case section | ~50 lines |
+| 7 | Why Us + Process sections | ~80 lines |
+| 8 | Industries + CTA + Footer | ~70 lines |
+| 9 | Visual QA pass | Varies |

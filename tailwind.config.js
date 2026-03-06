@@ -9,25 +9,40 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        space: ["'Space Grotesk'", "sans-serif"],
-        inter: ["'Inter'", "sans-serif"],
+      colors: {
+        base: "#09090B",
+        surface: "#111113",
+        elevated: "#18181B",
+        "b-subtle": "#27272A",
+        "b-hover": "#3F3F46",
+        "t-primary": "#FAFAFA",
+        "t-secondary": "#A1A1AA",
+        "t-tertiary": "#71717A",
+        accent: "#3B82F6",
+        "accent-glow": "#60A5FA",
       },
       keyframes: {
         marquee: {
-          "0%":   { transform: "translateX(0)" },
+          "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
-        "float-up": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%":      { transform: "translateY(-8px)" },
+        "mesh-drift": {
+          "0%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
+        },
+        "mesh-drift-2": {
+          "0%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(-40px, 30px) scale(1.15)" },
+          "66%": { transform: "translate(25px, -35px) scale(0.95)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
         },
       },
       animation: {
-        marquee:    "marquee 35s linear infinite",
-        "float-1":  "float-up 4s ease-in-out infinite",
-        "float-2":  "float-up 4s ease-in-out 1.3s infinite",
-        "float-3":  "float-up 4s ease-in-out 2.6s infinite",
+        marquee: "marquee 45s linear infinite",
+        "mesh-1": "mesh-drift 20s ease-in-out infinite",
+        "mesh-2": "mesh-drift-2 25s ease-in-out infinite",
       },
     },
   },
@@ -37,11 +52,8 @@ module.exports = {
       themes: {
         dark: {
           colors: {
-            primary:   { DEFAULT: "#1A9DD9", foreground: "#FFFFFF" },
-            secondary: { DEFAULT: "#A78BFA", foreground: "#FFFFFF" },
-            warning:   { DEFAULT: "#D4A843", foreground: "#0D1B3E" },
-            success:   { DEFAULT: "#10B981", foreground: "#FFFFFF" },
-            danger:    { DEFAULT: "#EF4444", foreground: "#FFFFFF" },
+            primary: { DEFAULT: "#3B82F6", foreground: "#FFFFFF" },
+            secondary: { DEFAULT: "#60A5FA", foreground: "#FFFFFF" },
           },
         },
       },
