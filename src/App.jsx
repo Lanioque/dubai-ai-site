@@ -339,17 +339,18 @@ export default function App() {
           PROBLEM
       ══════════════ */}
       <section className="relative py-28 px-6 overflow-hidden" id="problem">
-        {/* Decorative 3D Cube */}
-        <motion.div
-          animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-30 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal>
+            <div className="mb-8 block">
+              <motion.div
+                animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-[100px] h-[100px]"
+              >
+                <img src="https://framerusercontent.com/images/Pl9V2t5rkp7FCTrhINEUc1Iw8s.png" alt="Cube 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
+                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+              </motion.div>
+            </div>
             <SectionLabel>The Problem</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold leading-tight tracking-[-0.025em] mb-10 max-w-2xl">
               Legacy systems and slow delivery are costing GCC enterprises their edge.
@@ -403,17 +404,18 @@ export default function App() {
           SERVICES
       ══════════════ */}
       <section className="relative py-28 px-6 overflow-hidden" id="services">
-        {/* Decorative 3D Sphere */}
-        <motion.div
-          animate={{ y: [0, 15, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] right-[3%] w-[60px] h-[60px] md:w-[100px] md:h-[100px] pointer-events-none opacity-40 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="mb-14">
+            <div className="mb-8 block">
+              <motion.div
+                animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }}
+                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-[100px] h-[100px]"
+              >
+                <img src="https://framerusercontent.com/images/9IsJRQnYP6NETJKPhtQGJJUw.png" alt="Sphere 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
+                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+              </motion.div>
+            </div>
             <SectionLabel>What We Do</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-xl">
               AI · DevOps · MLOps · IT — end to end.
@@ -558,17 +560,18 @@ export default function App() {
           PROCESS
       ══════════════ */}
       <section className="relative py-28 px-6 overflow-hidden" id="process">
-        {/* Decorative 3D Torus */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 15, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[10%] left-[5%] w-[90px] h-[90px] md:w-[140px] md:h-[140px] pointer-events-none opacity-20 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="text-center max-w-lg mx-auto mb-16">
+            <div className="mb-8 flex justify-center">
+              <motion.div
+                animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-[100px] h-[100px]"
+              >
+                <img src="https://framerusercontent.com/images/PownipgzptIxLQEeew3jHizwJTU.png" alt="Torus 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
+                <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+              </motion.div>
+            </div>
             <SectionLabel center>How We Work</SectionLabel>
             <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em]">
               From first call to live system — fast.
@@ -654,15 +657,6 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.07] blur-[150px] rounded-full pointer-events-none" />
 
-        {/* Decorative 3D Cone */}
-        <motion.div
-          animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] right-[10%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] pointer-events-none opacity-40 mix-blend-screen"
-        >
-          <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="" className="w-full h-full object-contain" />
-        </motion.div>
-
         <motion.div
           whileHover={{ scale: 1.005 }}
           className="relative z-10 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-3xl max-w-5xl mx-auto overflow-hidden"
@@ -672,6 +666,16 @@ export default function App() {
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div className="py-20 px-6 text-center">
             <Reveal>
+              <div className="mb-8 flex justify-center">
+                <motion.div
+                  animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative w-[100px] h-[100px]"
+                >
+                  <img src="https://framerusercontent.com/images/2w02yOS7QYReFjc7ZMZjaDbw.png" alt="Cone 3D icon" className="w-full h-full object-contain grayscale opacity-90" />
+                  <div className="absolute inset-0 bg-accent mix-blend-color pointer-events-none" />
+                </motion.div>
+              </div>
               <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-5">
                 Ready to modernize your operations?
               </h2>
