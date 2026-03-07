@@ -201,8 +201,44 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
 
           {/* Brand */}
-          <a href="#hero" className="font-extrabold text-xl tracking-[-0.045em] text-t-primary select-none">
-            MHO<span className="text-accent">.AI</span>
+          <a href="#hero" className="flex items-center gap-2 font-bold text-xl tracking-tight text-t-primary select-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-7 h-7">
+              <defs>
+                <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff"></stop>
+                  <stop offset="25%" stopColor="#eff6ff"></stop>
+                  <stop offset="100%" stopColor="#93c5fd"></stop>
+                </linearGradient>
+                <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#60a5fa"></stop>
+                  <stop offset="50%" stopColor="#3b82f6"></stop>
+                  <stop offset="100%" stopColor="#2563eb"></stop>
+                </linearGradient>
+                <linearGradient id="rightFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#1e3a8a"></stop>
+                  <stop offset="70%" stopColor="#172554"></stop>
+                  <stop offset="100%" stopColor="#60a5fa"></stop>
+                </linearGradient>
+              </defs>
+              <g strokeLinejoin="round" strokeWidth="5">
+                <g>
+                  <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                  <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                  <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                </g>
+                <g>
+                  <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                  <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                  <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                </g>
+                <g>
+                  <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                  <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                  <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                </g>
+              </g>
+            </svg>
+            altis
           </a>
 
           {/* Desktop CTA */}
@@ -691,9 +727,45 @@ export default function App() {
       <footer className="border-t border-b-subtle px-6 py-14">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <p className="font-extrabold text-xl tracking-[-0.04em] mb-3">
-              MHO<span className="text-accent">.AI</span>
-            </p>
+            <div className="flex items-center gap-2 font-bold text-xl tracking-tight mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-8 h-8">
+                <defs>
+                  <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff"></stop>
+                    <stop offset="25%" stopColor="#eff6ff"></stop>
+                    <stop offset="100%" stopColor="#93c5fd"></stop>
+                  </linearGradient>
+                  <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#60a5fa"></stop>
+                    <stop offset="50%" stopColor="#3b82f6"></stop>
+                    <stop offset="100%" stopColor="#2563eb"></stop>
+                  </linearGradient>
+                  <linearGradient id="rightFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#1e3a8a"></stop>
+                    <stop offset="70%" stopColor="#172554"></stop>
+                    <stop offset="100%" stopColor="#60a5fa"></stop>
+                  </linearGradient>
+                </defs>
+                <g strokeLinejoin="round" strokeWidth="5">
+                  <g>
+                    <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                    <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                    <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  </g>
+                  <g>
+                    <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                    <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                    <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  </g>
+                  <g>
+                    <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
+                    <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
+                    <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  </g>
+                </g>
+              </svg>
+              <span>altis</span>
+            </div>
             <p className="text-t-tertiary text-sm leading-relaxed max-w-xs">
               IT · AI · DevOps · MLOps for the Gulf's most ambitious organizations.
               Based in Dubai, operating across the GCC.
@@ -726,7 +798,7 @@ export default function App() {
         </div>
 
         <div className="border-t border-b-subtle pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-t-tertiary text-xs">
-          <span>&copy; 2026 MHO.AI. All rights reserved.</span>
+          <span>&copy; 2026 altis. All rights reserved.</span>
           <span>Dubai, UAE</span>
         </div>
       </footer>
