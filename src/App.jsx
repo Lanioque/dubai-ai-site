@@ -202,39 +202,25 @@ export default function App() {
 
           {/* Brand */}
           <a href="#hero" className="flex items-center gap-2 font-bold text-xl tracking-tight text-t-primary select-none">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-7 h-7">
-              <defs>
-                <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#ffffff"></stop>
-                  <stop offset="25%" stopColor="#eff6ff"></stop>
-                  <stop offset="100%" stopColor="#93c5fd"></stop>
-                </linearGradient>
-                <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#60a5fa"></stop>
-                  <stop offset="50%" stopColor="#3b82f6"></stop>
-                  <stop offset="100%" stopColor="#2563eb"></stop>
-                </linearGradient>
-                <linearGradient id="rightFace" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#1e3a8a"></stop>
-                  <stop offset="70%" stopColor="#172554"></stop>
-                  <stop offset="100%" stopColor="#60a5fa"></stop>
-                </linearGradient>
-              </defs>
-              <g strokeLinejoin="round" strokeWidth="5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-7 h-7">
+              <g strokeLinejoin="round" strokeWidth="1">
+                {/* Bottom Layer (Dark Blue) */}
                 <g>
-                  <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                  <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                  <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
+                  <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
+                  <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
                 </g>
+                {/* Middle Layer (Medium Blue) */}
                 <g>
-                  <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                  <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                  <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
+                  <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
+                  <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
                 </g>
+                {/* Top Layer (White/Lightest Blue) */}
                 <g>
-                  <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                  <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                  <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                  <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
+                  <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
+                  <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
                 </g>
               </g>
             </svg>
@@ -299,10 +285,19 @@ export default function App() {
       ══════════════════════════════════════════════════ */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden" id="hero">
 
-        {/* ── Glow Background ── */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[500px] bg-accent/10 blur-[120px] rounded-full mix-blend-screen" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-base/80 to-base" />
+        {/* ── Video Background ── */}
+        <div className="absolute inset-0 w-full h-full bg-accent/20">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-70 grayscale mix-blend-screen"
+            src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4"
+          />
+          <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
+          {/* Top/bottom gradient fades to blend with the rest of the page */}
+          <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
         </div>
 
         {/* ── Centered Content ── */}
@@ -337,39 +332,25 @@ export default function App() {
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10">
-                  <defs>
-                    <linearGradient id="heroTopFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ffffff"></stop>
-                      <stop offset="25%" stopColor="#eff6ff"></stop>
-                      <stop offset="100%" stopColor="#93c5fd"></stop>
-                    </linearGradient>
-                    <linearGradient id="heroLeftFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#60a5fa"></stop>
-                      <stop offset="50%" stopColor="#3b82f6"></stop>
-                      <stop offset="100%" stopColor="#2563eb"></stop>
-                    </linearGradient>
-                    <linearGradient id="heroRightFace" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#1e3a8a"></stop>
-                      <stop offset="70%" stopColor="#172554"></stop>
-                      <stop offset="100%" stopColor="#60a5fa"></stop>
-                    </linearGradient>
-                  </defs>
-                  <g strokeLinejoin="round" strokeWidth="5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10">
+                  <g strokeLinejoin="round" strokeWidth="1">
+                    {/* Bottom Layer (Dark Blue) */}
                     <g>
-                      <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
-                      <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
-                      <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                      <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
+                      <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
+                      <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
                     </g>
+                    {/* Middle Layer (Medium Blue) */}
                     <g>
-                      <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
-                      <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
-                      <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                      <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
+                      <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
+                      <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
                     </g>
+                    {/* Top Layer (White/Lightest Blue) */}
                     <g>
-                      <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
-                      <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
-                      <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                      <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
+                      <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
+                      <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
                     </g>
                   </g>
                 </svg>
@@ -771,39 +752,25 @@ export default function App() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="flex items-center gap-2 font-bold text-xl tracking-tight mb-3">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-8 h-8">
-                <defs>
-                  <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff"></stop>
-                    <stop offset="25%" stopColor="#eff6ff"></stop>
-                    <stop offset="100%" stopColor="#93c5fd"></stop>
-                  </linearGradient>
-                  <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#60a5fa"></stop>
-                    <stop offset="50%" stopColor="#3b82f6"></stop>
-                    <stop offset="100%" stopColor="#2563eb"></stop>
-                  </linearGradient>
-                  <linearGradient id="rightFace" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#1e3a8a"></stop>
-                    <stop offset="70%" stopColor="#172554"></stop>
-                    <stop offset="100%" stopColor="#60a5fa"></stop>
-                  </linearGradient>
-                </defs>
-                <g strokeLinejoin="round" strokeWidth="5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-8 h-8">
+                <g strokeLinejoin="round" strokeWidth="1">
+                  {/* Bottom Layer (Dark Blue) */}
                   <g>
-                    <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                    <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                    <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                    <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
+                    <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
+                    <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
                   </g>
+                  {/* Middle Layer (Medium Blue) */}
                   <g>
-                    <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                    <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                    <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                    <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
+                    <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
+                    <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
                   </g>
+                  {/* Top Layer (White/Lightest Blue) */}
                   <g>
-                    <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#leftFace)" stroke="url(#leftFace)"></path>
-                    <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#rightFace)" stroke="url(#rightFace)"></path>
-                    <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#topFace)" stroke="url(#topFace)"></path>
+                    <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
+                    <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
+                    <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
                   </g>
                 </g>
               </svg>
