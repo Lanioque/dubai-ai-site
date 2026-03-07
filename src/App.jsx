@@ -389,19 +389,23 @@ export default function App() {
           <Reveal delay={0.1}>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               {[
-                { icon: "⚙", label: "Manual processes", desc: "Critical workflows still routed by email, documents processed by hand, no real-time visibility." },
-                { icon: "⏳", label: "Slow delivery", desc: "Long cycles and fragile infra prevent teams from shipping improvements quickly." },
-                { icon: "🧩", label: "AI without strategy", desc: "Companies experiment with AI in isolation, no plan to scale or embed it into real operations." },
+                { asset: "https://framerusercontent.com/images/lwzl05NderimTGi1g65hAh1YM.png?scale-down-to=1024", label: "Manual processes", desc: "Critical workflows still routed by email, documents processed by hand, no real-time visibility." },
+                { asset: "https://framerusercontent.com/images/rL9aXUROkOnl8jVFOpmyBGPLv8.png?scale-down-to=1024", label: "Slow delivery", desc: "Long cycles and fragile infra prevent teams from shipping improvements quickly." },
+                { asset: "https://framerusercontent.com/images/tGMNowtpfbH8patPUsQxfCFlIU.png?scale-down-to=1024", label: "AI without strategy", desc: "Companies experiment with AI in isolation, no plan to scale or embed it into real operations." },
               ].map((s, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.02, rotateY: 2 }}
                   style={{ perspective: "800px", transformStyle: "preserve-3d" }}
-                  className="bg-surface border border-b-subtle rounded-2xl p-7 cursor-default transition-all duration-300 hover:border-accent/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+                  className="bg-surface border border-b-subtle rounded-2xl p-7 flex flex-col cursor-default transition-all duration-300 hover:border-accent/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden relative group"
                 >
-                  <div className="text-2xl mb-3">{s.icon}</div>
-                  <div className="text-t-primary font-semibold text-base mb-2">{s.label}</div>
-                  <div className="text-sm text-t-secondary leading-relaxed">{s.desc}</div>
+                  <div className="relative w-24 h-24 mb-6 mt-2 self-start ml-[-8px]">
+                    <div className="absolute inset-0 scale-[1.3] group-hover:scale-[1.5] transition-transform duration-500 pointer-events-none">
+                      <Floating3DAsset src={s.asset} alt={s.label} className="w-full h-full" />
+                    </div>
+                  </div>
+                  <div className="relative z-10 text-t-primary font-semibold text-base mb-2">{s.label}</div>
+                  <div className="relative z-10 text-sm text-t-secondary leading-relaxed">{s.desc}</div>
                 </motion.div>
               ))}
             </div>
