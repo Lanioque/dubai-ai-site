@@ -58,25 +58,25 @@ export default function ThreeDLogo({ className = '' }) {
         const envRenderTarget = pmremGenerator.fromScene(envScene);
         const metallicEnvMap = envRenderTarget.texture;
 
-        // 3. True Metallic PBR Materials (Contrasting Blues)
+        // 3. True Metallic PBR Materials (Contrasting Lighter Blues)
         const frameMaterial = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color("#1e3a8a"), // Deep navy for the outer frame
+            color: new THREE.Color("#3b82f6"), // Lighter base blue instead of navy
             metalness: 0.95,
             roughness: 0.1,
             clearcoat: 1.0,
             clearcoatRoughness: 0.02,
             envMap: metallicEnvMap,
-            envMapIntensity: 2.0
+            envMapIntensity: 2.5 // Increased environmental reflection
         });
 
         const sparkleMaterial = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color("#3b82f6"), // Bright accent blue for the inner star
+            color: new THREE.Color("#93c5fd"), // Bright glowing cyan/light blue
             metalness: 0.9,
-            roughness: 0.15,
+            roughness: 0.1,
             clearcoat: 1.0,
-            clearcoatRoughness: 0.05,
+            clearcoatRoughness: 0.02,
             envMap: metallicEnvMap,
-            envMapIntensity: 2.0
+            envMapIntensity: 2.5 // Increased environmental reflection
         });
 
         // 4. Geometry Generation
@@ -137,14 +137,15 @@ export default function ThreeDLogo({ className = '' }) {
         group.add(sparkleMesh);
 
         // 5. Direct Scene Lighting
-        const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+        // Increased all light intensities to combat darkness and enhance the metallic sheen
+        const ambient = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambient);
 
-        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.0);
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.0);
         dirLight1.position.set(50, 50, 50);
         scene.add(dirLight1);
 
-        const dirLight2 = new THREE.DirectionalLight(0xbae6fd, 0.8);
+        const dirLight2 = new THREE.DirectionalLight(0xbae6fd, 1.5);
         dirLight2.position.set(-50, -50, 50);
         scene.add(dirLight2);
 

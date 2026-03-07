@@ -206,8 +206,8 @@ export default function App() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-7 h-7">
               <defs>
                 <linearGradient id="logoGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#60a5fa" />
-                  <stop offset="100%" stopColor="#2563eb" />
+                  <stop offset="0%" stopColor="#93c5fd" />
+                  <stop offset="100%" stopColor="#3b82f6" />
                 </linearGradient>
               </defs>
               <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="url(#logoGradNav)" />
@@ -718,8 +718,8 @@ export default function App() {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-8 h-8">
                 <defs>
                   <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#60a5fa" />
-                    <stop offset="100%" stopColor="#2563eb" />
+                    <stop offset="0%" stopColor="#93c5fd" />
+                    <stop offset="100%" stopColor="#3b82f6" />
                   </linearGradient>
                 </defs>
                 <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="url(#logoGradFooter)" />
