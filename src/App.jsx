@@ -39,68 +39,14 @@ function Floating3DAsset({ src, alt, className }) {
 }
 
 /* ──────────────────────────────────────────────────────────
-   PSEUDO 3D LOGO COMPONENT
+   FLAT WHITE LOGO COMPONENT
 ────────────────────────────────────────────────────────── */
-function Pseudo3DLogo({ className = "", idSuffix = "logo", removeBg = false }) {
+function Logo({ className = "" }) {
+  // A simplified, entirely flat white version of the logo shape
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className={className}>
-      <defs>
-        <radialGradient id={`bgGlow-${idSuffix}`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#1e3a8a" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#000000" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id={`metallicChrome-${idSuffix}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="6%" stopColor="#dbeafe" />
-          <stop offset="15%" stopColor="#000000" />
-          <stop offset="45%" stopColor="#0a0a0a" />
-          <stop offset="60%" stopColor="#1e40af" />
-          <stop offset="75%" stopColor="#000000" />
-          <stop offset="88%" stopColor="#3b82f6" />
-          <stop offset="96%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#bfdbfe" />
-        </linearGradient>
-        <linearGradient id={`innerBevel-${idSuffix}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#000000" stopOpacity="0.9" />
-          <stop offset="50%" stopColor="#000000" stopOpacity="0" />
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.4" />
-        </linearGradient>
-        <linearGradient id={`edgeHighlight-${idSuffix}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-          <stop offset="25%" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="75%" stopColor="#60a5fa" stopOpacity="0" />
-          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.8" />
-        </linearGradient>
-        <filter id={`glowBlur-${idSuffix}`} x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="8" />
-        </filter>
-        <filter id={`heavyBlur-${idSuffix}`} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="15" />
-        </filter>
-      </defs>
-
-      {!removeBg && (
-        <>
-          <rect width="200" height="200" fill={`url(#bgGlow-${idSuffix})`} />
-          <circle cx="60" cy="60" r="45" fill="#3b82f6" opacity="0.25" filter={`url(#heavyBlur-${idSuffix})`} />
-          <circle cx="140" cy="140" r="45" fill="#60a5fa" opacity="0.15" filter={`url(#heavyBlur-${idSuffix})`} />
-        </>
-      )}
-
-      <g>
-        {/* Outer Ring */}
-        <rect x="36" y="36" width="128" height="128" rx="32" fill="none" stroke="#1e3a8a" strokeWidth="16" filter={`url(#glowBlur-${idSuffix})`} opacity="0.6" />
-        <rect x="36" y="36" width="128" height="128" rx="32" fill="none" stroke={`url(#metallicChrome-${idSuffix})`} strokeWidth="20" />
-        <rect x="36" y="36" width="128" height="128" rx="32" fill="none" stroke={`url(#innerBevel-${idSuffix})`} strokeWidth="20" />
-        <rect x="26" y="26" width="148" height="148" rx="42" fill="none" stroke={`url(#edgeHighlight-${idSuffix})`} strokeWidth="1.5" opacity="0.9" />
-        <rect x="46" y="46" width="108" height="108" rx="22" fill="none" stroke={`url(#edgeHighlight-${idSuffix})`} strokeWidth="1.5" opacity="0.7" />
-
-        {/* Center Sparkle/Star */}
-        <path d="M 100 56 C 100 86, 86 100, 56 100 C 86 100, 100 114, 100 144 C 100 114, 114 100, 144 100 C 114 100, 100 86, 100 56 Z" fill="#3b82f6" filter={`url(#glowBlur-${idSuffix})`} opacity="0.6" />
-        <path d="M 100 56 C 100 86, 86 100, 56 100 C 86 100, 100 114, 100 144 C 100 114, 114 100, 144 100 C 114 100, 100 86, 100 56 Z" fill={`url(#metallicChrome-${idSuffix})`} />
-        <path d="M 100 56 C 100 86, 86 100, 56 100 C 86 100, 100 114, 100 144 C 100 114, 114 100, 144 100 C 114 100, 100 86, 100 56 Z" fill={`url(#innerBevel-${idSuffix})`} />
-        <path d="M 100 56 C 100 86, 86 100, 56 100 C 86 100, 100 114, 100 144 C 100 114, 114 100, 144 100 C 114 100, 100 86, 100 56 Z" fill="none" stroke={`url(#edgeHighlight-${idSuffix})`} strokeWidth="1.5" opacity="0.9" />
-      </g>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={className}>
+      <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="#FFFFFF" />
+      <path d="M 50 28 Q 54.4 45.6 72 50 Q 54.4 54.4 50 72 Q 45.6 54.4 28 50 Q 45.6 45.6 50 28 Z" fill="#FFFFFF" />
     </svg>
   );
 }
@@ -120,6 +66,53 @@ const C = {
   accent: "#3B82F6",
   accentGlow: "#60A5FA",
 };
+
+/* ──────────────────────────────────────────────────────────
+   TYPEWRITER HOOK
+────────────────────────────────────────────────────────── */
+function useTypewriter(texts, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2000) {
+  const [displayText, setDisplayText] = useState("");
+  const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const currentFullText = texts[textIndex];
+
+    if (isPaused) {
+      const pauseTimer = setTimeout(() => {
+        setIsPaused(false);
+        setIsDeleting(true);
+      }, pauseDuration);
+      return () => clearTimeout(pauseTimer);
+    }
+
+    if (isDeleting) {
+      if (displayText.length === 0) {
+        setIsDeleting(false);
+        setTextIndex((prev) => (prev + 1) % texts.length);
+        return;
+      }
+      const deleteTimer = setTimeout(() => {
+        setDisplayText((prev) => prev.slice(0, -1));
+      }, deletingSpeed);
+      return () => clearTimeout(deleteTimer);
+    }
+
+    // Typing
+    if (displayText.length < currentFullText.length) {
+      const typeTimer = setTimeout(() => {
+        setDisplayText(currentFullText.slice(0, displayText.length + 1));
+      }, typingSpeed);
+      return () => clearTimeout(typeTimer);
+    } else {
+      // Finished typing, pause
+      setIsPaused(true);
+    }
+  }, [displayText, textIndex, isDeleting, isPaused, texts, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return displayText;
+}
 
 /* ──────────────────────────────────────────────────────────
    REVEAL ANIMATION
@@ -249,10 +242,15 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const tilt = use3DTilt();
 
+  const heroTexts = ["AI.", "Altis."];
+  const typedText = useTypewriter(heroTexts, 100, 50, 2500);
+
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -269,7 +267,7 @@ export default function App() {
 
           {/* Brand */}
           <a href="#hero" className="flex items-center gap-2 font-bold text-xl tracking-tight text-t-primary select-none">
-            <Pseudo3DLogo className="w-7 h-7" idSuffix="Nav" removeBg />
+            <Logo className="w-7 h-7" />
             altis
           </a>
 
@@ -367,31 +365,25 @@ export default function App() {
               </span>
             </motion.div>
 
-            {/* Prominent Logo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
-              className="mb-6 relative w-full flex justify-center"
-            >
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Pseudo3DLogo className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10" idSuffix="Hero" removeBg />
-                {/* Glow behind the logo */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
-              </motion.div>
-            </motion.div>
 
             {/* Headline */}
-            <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.04em] mb-4 text-t-primary">
-              Automate Smarter.<br /> Grow Faster.{" "}
-              <em className="font-serif italic font-normal text-t-secondary">With AI.</em>
+            <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.04em] mb-4 text-t-primary relative drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+              Automate Smarter.<br />
+              <span className="whitespace-nowrap">
+                Grow Faster.{" "}
+                <em className="font-serif italic font-normal text-t-secondary">
+                  With {typedText}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+                    className="inline-block w-[3px] h-[0.9em] bg-accent ml-1 align-middle"
+                  />
+                </em>
+              </span>
             </h1>
 
             {/* Subtext */}
-            <p className="text-t-secondary text-base sm:text-lg md:text-xl leading-relaxed mb-6 max-w-2xl mx-auto">
+            <p className="text-t-secondary text-base sm:text-lg md:text-xl leading-relaxed mb-6 max-w-2xl mx-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed, reliability, and modern automation made simple.
             </p>
 
@@ -777,7 +769,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="flex items-center gap-2 font-bold text-xl tracking-tight mb-3">
-              <Pseudo3DLogo className="w-8 h-8" idSuffix="Footer" removeBg />
+              <Logo className="w-8 h-8" />
               <span>altis</span>
             </div>
             <p className="text-t-tertiary text-sm leading-relaxed max-w-xs">
