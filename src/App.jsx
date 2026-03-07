@@ -377,7 +377,7 @@ export default function App() {
       {/* ══════════════
           PROBLEM
       ══════════════ */}
-      <section className="relative py-28 px-6 overflow-hidden" id="problem">
+      <section className="relative py-20 px-6 overflow-hidden" id="problem">
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal>
             <SectionLabel>The Problem</SectionLabel>
@@ -439,7 +439,7 @@ export default function App() {
       {/* ══════════════
           SERVICES
       ══════════════ */}
-      <section className="relative py-28 px-6 overflow-hidden" id="services">
+      <section className="relative py-20 px-6 overflow-hidden" id="services">
         <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="mb-14">
             <div className="text-left">
@@ -492,7 +492,7 @@ export default function App() {
       {/* ══════════════
           USE CASE
       ══════════════ */}
-      <section className="py-28 px-6" id="use-cases">
+      <section className="py-20 px-6" id="use-cases">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
             <SectionLabel>Use Case</SectionLabel>
@@ -559,20 +559,22 @@ export default function App() {
       {/* ══════════════
           PROCESS
       ══════════════ */}
-      <section className="relative py-28 px-6 overflow-hidden" id="process">
+      <section className="relative py-20 px-6 overflow-hidden" id="process">
         <div className="relative z-10 max-w-5xl mx-auto">
-          <Reveal className="text-center max-w-lg mx-auto mb-16">
-            <div className="mb-8 flex justify-center">
+          <Reveal className="mb-14">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-12">
+              <div className="flex-1 max-w-lg text-left">
+                <SectionLabel>How We Work</SectionLabel>
+                <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight">
+                  From first call to live system — fast.
+                </h2>
+              </div>
               <Floating3DAsset
                 src="https://framerusercontent.com/images/NiVn6Asi8d1V7EYj1Nz9jecbaJI.png?scale-down-to=1024"
                 alt="Abstract 3D Shape"
-                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]"
+                className="relative w-[160px] h-[160px] md:w-[240px] md:h-[240px] shrink-0"
               />
             </div>
-            <SectionLabel center>How We Work</SectionLabel>
-            <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em]">
-              From first call to live system — fast.
-            </h2>
           </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
@@ -612,7 +614,7 @@ export default function App() {
       {/* ══════════════
           INDUSTRIES
       ══════════════ */}
-      <section className="py-28 px-6" id="industries">
+      <section className="py-20 px-6" id="industries">
         <div className="max-w-5xl mx-auto">
           <Reveal className="mb-14">
             <SectionLabel>Industries</SectionLabel>
@@ -642,7 +644,7 @@ export default function App() {
       {/* ══════════════
           CTA
       ══════════════ */}
-      <section className="py-28 px-6 relative overflow-hidden">
+      <section className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base/80 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-accent/[0.07] blur-[150px] rounded-full pointer-events-none" />
 
