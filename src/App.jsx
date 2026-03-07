@@ -299,19 +299,10 @@ export default function App() {
       ══════════════════════════════════════════════════ */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden" id="hero">
 
-        {/* ── Video Background ── */}
-        <div className="absolute inset-0 w-full h-full bg-accent/20">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-70 grayscale mix-blend-screen"
-            src="https://framerusercontent.com/assets/1g8IkhtJmlWcC4zEYWKUmeGWzI.mp4"
-          />
-          <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-          {/* Top/bottom gradient fades to blend with the rest of the page */}
-          <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-transparent to-base" />
+        {/* ── Glow Background ── */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[500px] bg-accent/10 blur-[120px] rounded-full mix-blend-screen" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-base/80 to-base" />
         </div>
 
         {/* ── Centered Content ── */}
@@ -333,6 +324,58 @@ export default function App() {
               <span className="text-[0.65rem] font-medium tracking-[0.1em] text-t-secondary uppercase">
                 New Gen AI Automation Partner
               </span>
+            </motion.div>
+
+            {/* Prominent 3D Logo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
+              className="mb-8 relative"
+            >
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 170 200 220" className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10">
+                  <defs>
+                    <linearGradient id="heroTopFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ffffff"></stop>
+                      <stop offset="25%" stopColor="#eff6ff"></stop>
+                      <stop offset="100%" stopColor="#93c5fd"></stop>
+                    </linearGradient>
+                    <linearGradient id="heroLeftFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#60a5fa"></stop>
+                      <stop offset="50%" stopColor="#3b82f6"></stop>
+                      <stop offset="100%" stopColor="#2563eb"></stop>
+                    </linearGradient>
+                    <linearGradient id="heroRightFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#1e3a8a"></stop>
+                      <stop offset="70%" stopColor="#172554"></stop>
+                      <stop offset="100%" stopColor="#60a5fa"></stop>
+                    </linearGradient>
+                  </defs>
+                  <g strokeLinejoin="round" strokeWidth="5">
+                    <g>
+                      <path d="M 120,290 L 200,330 L 200,370 L 120,330 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
+                      <path d="M 200,330 L 280,290 L 280,330 L 200,370 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
+                      <path d="M 200,250 L 280,290 L 200,330 L 120,290 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                    </g>
+                    <g>
+                      <path d="M 120,262 L 200,302 L 200,318 L 120,278 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
+                      <path d="M 200,302 L 280,262 L 280,278 L 200,318 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
+                      <path d="M 200,222 L 280,262 L 200,302 L 120,262 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                    </g>
+                    <g>
+                      <path d="M 120,234 L 200,274 L 200,290 L 120,250 Z" fill="url(#heroLeftFace)" stroke="url(#heroLeftFace)"></path>
+                      <path d="M 200,274 L 280,234 L 280,250 L 200,290 Z" fill="url(#heroRightFace)" stroke="url(#heroRightFace)"></path>
+                      <path d="M 200,194 L 280,234 L 200,274 L 120,234 Z" fill="url(#heroTopFace)" stroke="url(#heroTopFace)"></path>
+                    </g>
+                  </g>
+                </svg>
+                {/* Glow behind the logo */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
+              </motion.div>
             </motion.div>
 
             {/* Headline */}
