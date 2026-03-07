@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default function ThreeDLogo({ className = '' }) {
     const containerRef = useRef(null);
@@ -140,21 +139,23 @@ export default function ThreeDLogo({ className = '' }) {
         scene.add(dirLight2);
 
         // 6. Interaction & Animation
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.autoRotate = true; // Added gentle auto-rotation for the hero
-        controls.autoRotateSpeed = 2.0;
-        controls.enablePan = false;
-        controls.enableZoom = false;
-
         group.rotation.x = 0.35;
         group.rotation.y = 0.45;
 
+        const clock = new THREE.Clock();
         let reqId;
         function animate() {
             reqId = requestAnimationFrame(animate);
-            controls.update();
+            const t = clock.getElapsedTime();
+
+            // Smooth swinging oscillation
+            group.rotation.y = 0.45 + Math.sin(t * 1.5) * 0.15;
+            group.rotation.x = 0.35 + Math.cos(t * 1.2) * 0.1;
+
+            // Move the light slightly to create dynamic dancing reflections on the metal
+            dirLight1.position.x = 50 + Math.sin(t * 2) * 30;
+            dirLight1.position.y = 50 + Math.cos(t * 1.5) * 20;
+
             renderer.render(scene, camera);
         }
         animate();
@@ -182,19 +183,7 @@ export default function ThreeDLogo({ className = '' }) {
 
     return (
         <div className={`relative ${className}`}>
-            <div ref={containerRef} className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing" />
-            {/* UI Overlay */}
-            <div className="absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 shadow-2xl z-20 bg-base/60 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 flex items-center gap-3 sm:gap-4 pointer-events-none whitespace-nowrap">
-                <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent shadow-[0_0_8px_#3b82f6]"></div>
-                    <span className="text-[9px] sm:text-xs font-medium tracking-wide text-gray-200 uppercase">Interactive 3D</span>
-                </div>
-                <div className="w-px h-3 sm:h-4 bg-white/20"></div>
-                <div className="text-[9px] sm:text-xs text-gray-400 flex items-center gap-1.5">
-                    <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                    Drag to Inspect
-                </div>
-            </div>
+            <div ref={containerRef} className="absolute inset-0 z-10 pointer-events-none" />
         </div>
     );
 }

@@ -204,26 +204,14 @@ export default function App() {
           {/* Brand */}
           <a href="#hero" className="flex items-center gap-2 font-bold text-xl tracking-tight text-t-primary select-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-7 h-7">
-              <g strokeLinejoin="round" strokeWidth="1">
-                {/* Bottom Layer (Dark Blue) */}
-                <g>
-                  <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
-                  <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
-                  <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
-                </g>
-                {/* Middle Layer (Medium Blue) */}
-                <g>
-                  <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
-                  <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
-                  <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
-                </g>
-                {/* Top Layer (White/Lightest Blue) */}
-                <g>
-                  <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
-                  <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
-                  <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
-                </g>
-              </g>
+              <defs>
+                <linearGradient id="logoGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#60a5fa" />
+                  <stop offset="100%" stopColor="#2563eb" />
+                </linearGradient>
+              </defs>
+              <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="url(#logoGradNav)" />
+              <path d="M 50 28 Q 54.4 45.6 72 50 Q 54.4 54.4 50 72 Q 45.6 54.4 28 50 Q 45.6 45.6 50 28 Z" fill="url(#logoGradNav)" />
             </svg>
             altis
           </a>
@@ -728,26 +716,14 @@ export default function App() {
           <div>
             <div className="flex items-center gap-2 font-bold text-xl tracking-tight mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-8 h-8">
-                <g strokeLinejoin="round" strokeWidth="1">
-                  {/* Bottom Layer (Dark Blue) */}
-                  <g>
-                    <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
-                    <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
-                    <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
-                  </g>
-                  {/* Middle Layer (Medium Blue) */}
-                  <g>
-                    <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
-                    <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
-                    <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
-                  </g>
-                  {/* Top Layer (White/Lightest Blue) */}
-                  <g>
-                    <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
-                    <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
-                    <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
-                  </g>
-                </g>
+                <defs>
+                  <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#60a5fa" />
+                    <stop offset="100%" stopColor="#2563eb" />
+                  </linearGradient>
+                </defs>
+                <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="url(#logoGradFooter)" />
+                <path d="M 50 28 Q 54.4 45.6 72 50 Q 54.4 54.4 50 72 Q 45.6 54.4 28 50 Q 45.6 45.6 50 28 Z" fill="url(#logoGradFooter)" />
               </svg>
               <span>altis</span>
             </div>
