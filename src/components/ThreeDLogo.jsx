@@ -58,15 +58,25 @@ export default function ThreeDLogo({ className = '' }) {
         const envRenderTarget = pmremGenerator.fromScene(envScene);
         const metallicEnvMap = envRenderTarget.texture;
 
-        // 3. True Metallic PBR Material
-        const metalMaterial = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color("rgb(59, 130, 246)"),
-            metalness: 0.7,
+        // 3. True Metallic PBR Materials (Contrasting Blues)
+        const frameMaterial = new THREE.MeshPhysicalMaterial({
+            color: new THREE.Color("#1e3a8a"), // Deep navy for the outer frame
+            metalness: 0.95,
+            roughness: 0.1,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.02,
+            envMap: metallicEnvMap,
+            envMapIntensity: 2.0
+        });
+
+        const sparkleMaterial = new THREE.MeshPhysicalMaterial({
+            color: new THREE.Color("#3b82f6"), // Bright accent blue for the inner star
+            metalness: 0.9,
             roughness: 0.15,
             clearcoat: 1.0,
             clearcoatRoughness: 0.05,
             envMap: metallicEnvMap,
-            envMapIntensity: 1.5
+            envMapIntensity: 2.0
         });
 
         // 4. Geometry Generation
@@ -117,8 +127,8 @@ export default function ThreeDLogo({ className = '' }) {
         const group = new THREE.Group();
         scene.add(group);
 
-        const frameMesh = new THREE.Mesh(frameGeo, metalMaterial);
-        const sparkleMesh = new THREE.Mesh(sparkleGeo, metalMaterial);
+        const frameMesh = new THREE.Mesh(frameGeo, frameMaterial);
+        const sparkleMesh = new THREE.Mesh(sparkleGeo, sparkleMaterial);
 
         frameMesh.position.z = -5;
         sparkleMesh.position.z = 5;
@@ -148,9 +158,12 @@ export default function ThreeDLogo({ className = '' }) {
             reqId = requestAnimationFrame(animate);
             const t = clock.getElapsedTime();
 
-            // Smooth swinging oscillation
+            // Smooth swinging oscillation for the frame
             group.rotation.y = 0.45 + Math.sin(t * 1.5) * 0.15;
             group.rotation.x = 0.35 + Math.cos(t * 1.2) * 0.1;
+
+            // Full continuous 360 rotation for the inner star
+            sparkleMesh.rotation.z = t * 1.2;
 
             // Move the light slightly to create dynamic dancing reflections on the metal
             dirLight1.position.x = 50 + Math.sin(t * 2) * 30;

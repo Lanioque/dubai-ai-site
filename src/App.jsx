@@ -302,7 +302,7 @@ export default function App() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               <span className="text-[0.65rem] font-medium tracking-[0.1em] text-t-secondary uppercase">
@@ -315,7 +315,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
-              className="mb-8 relative w-full flex justify-center"
+              className="mb-4 relative w-full flex justify-center"
             >
               <ThreeDLogo className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] z-10" />
               {/* Glow behind the logo */}
@@ -323,13 +323,13 @@ export default function App() {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.04em] mb-6 text-t-primary">
+            <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.04em] mb-4 text-t-primary">
               Automate Smarter.<br /> Grow Faster.{" "}
               <em className="font-serif italic font-normal text-t-secondary">With AI.</em>
             </h1>
 
             {/* Subtext */}
-            <p className="text-t-secondary text-base sm:text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="text-t-secondary text-base sm:text-lg md:text-xl leading-relaxed mb-6 max-w-2xl mx-auto">
               AI, DevOps, MLOps, and managed IT — built for Gulf enterprises that need speed, reliability, and modern automation made simple.
             </p>
 
