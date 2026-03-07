@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
+import ThreeDLogo from "./components/ThreeDLogo";
 
 /* ──────────────────────────────────────────────────────────
    3D ASSET COMPONENT
@@ -321,42 +322,16 @@ export default function App() {
               </span>
             </motion.div>
 
-            {/* Prominent 3D Logo */}
+            {/* Prominent True 3D Metallic Logo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
-              className="mb-8 relative"
+              className="mb-8 relative w-full flex justify-center"
             >
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10">
-                  <g strokeLinejoin="round" strokeWidth="1">
-                    {/* Bottom Layer (Dark Blue) */}
-                    <g>
-                      <path d="M 50,46 L 90,66 L 50,86 L 10,66 Z" fill="#1e40af" stroke="#1e40af" />
-                      <path d="M 10,66 L 50,86 L 50,94 L 10,74 Z" fill="#1e3a8a" stroke="#1e3a8a" />
-                      <path d="M 50,86 L 90,66 L 90,74 L 50,94 Z" fill="#172554" stroke="#172554" />
-                    </g>
-                    {/* Middle Layer (Medium Blue) */}
-                    <g>
-                      <path d="M 50,28 L 90,48 L 50,68 L 10,48 Z" fill="#3b82f6" stroke="#3b82f6" />
-                      <path d="M 10,48 L 50,68 L 50,76 L 10,56 Z" fill="#2563eb" stroke="#2563eb" />
-                      <path d="M 50,68 L 90,48 L 90,56 L 50,76 Z" fill="#1d4ed8" stroke="#1d4ed8" />
-                    </g>
-                    {/* Top Layer (White/Lightest Blue) */}
-                    <g>
-                      <path d="M 50,10 L 90,30 L 50,50 L 10,30 Z" fill="#ffffff" stroke="#ffffff" />
-                      <path d="M 10,30 L 50,50 L 50,58 L 10,38 Z" fill="#dbeafe" stroke="#dbeafe" />
-                      <path d="M 50,50 L 90,30 L 90,38 L 50,58 Z" fill="#bfdbfe" stroke="#bfdbfe" />
-                    </g>
-                  </g>
-                </svg>
-                {/* Glow behind the logo */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
-              </motion.div>
+              <ThreeDLogo className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] z-10" />
+              {/* Glow behind the logo */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
             </motion.div>
 
             {/* Headline */}
