@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
-import ThreeDLogo from "./components/ThreeDLogo";
 
 /* ──────────────────────────────────────────────────────────
    3D ASSET COMPONENT
@@ -310,16 +309,30 @@ export default function App() {
               </span>
             </motion.div>
 
-            {/* Prominent True 3D Metallic Logo */}
+            {/* Prominent Logo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
-              className="mb-4 relative w-full flex justify-center"
+              className="mb-6 relative w-full flex justify-center"
             >
-              <ThreeDLogo className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] z-10" />
-              {/* Glow behind the logo */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] mx-auto relative z-10">
+                  <defs>
+                    <linearGradient id="logoGradHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#93c5fd" />
+                      <stop offset="100%" stopColor="#3b82f6" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 24 0 H 76 A 24 24 0 0 1 100 24 V 76 A 24 24 0 0 1 76 100 H 24 A 24 24 0 0 1 0 76 V 24 A 24 24 0 0 1 24 0 Z M 32 16 H 68 A 16 16 0 0 1 84 32 V 68 A 16 16 0 0 1 68 84 H 32 A 16 16 0 0 1 16 68 V 32 A 16 16 0 0 1 32 16 Z" fillRule="evenodd" fill="url(#logoGradHero)" />
+                  <path d="M 50 28 Q 54.4 45.6 72 50 Q 54.4 54.4 50 72 Q 45.6 54.4 28 50 Q 45.6 45.6 50 28 Z" fill="url(#logoGradHero)" />
+                </svg>
+                {/* Glow behind the logo */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/40 blur-[60px] rounded-full pointer-events-none" />
+              </motion.div>
             </motion.div>
 
             {/* Headline */}
