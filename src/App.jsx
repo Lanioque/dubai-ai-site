@@ -397,15 +397,18 @@ export default function App() {
                   key={i}
                   whileHover={{ scale: 1.02, rotateY: 2 }}
                   style={{ perspective: "800px", transformStyle: "preserve-3d" }}
-                  className="bg-surface border border-b-subtle rounded-2xl p-7 flex flex-col cursor-default transition-all duration-300 hover:border-accent/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden relative group"
+                  className="relative h-full min-h-[380px] bg-surface border border-b-subtle rounded-2xl p-8 flex flex-col justify-end cursor-default transition-all duration-300 hover:border-accent/40 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden group"
                 >
-                  <div className="relative w-24 h-24 mb-6 mt-2 self-start ml-[-8px]">
-                    <div className="absolute inset-0 scale-[1.3] group-hover:scale-[1.5] transition-transform duration-500 pointer-events-none">
-                      <Floating3DAsset src={s.asset} alt={s.label} className="w-full h-full" />
-                    </div>
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-t-2xl" />
+
+                  <div className="absolute top-[-5%] md:top-[-10%] left-1/2 -translate-x-1/2 w-[240px] pointer-events-none scale-100 group-hover:scale-110 transition-transform duration-700">
+                    <Floating3DAsset src={s.asset} alt={s.label} className="w-full h-full" />
                   </div>
-                  <div className="relative z-10 text-t-primary font-semibold text-base mb-2">{s.label}</div>
-                  <div className="relative z-10 text-sm text-t-secondary leading-relaxed">{s.desc}</div>
+
+                  <div className="relative z-10 mt-32">
+                    <div className="text-t-primary font-semibold text-lg mb-3 drop-shadow-md">{s.label}</div>
+                    <div className="text-[0.95rem] text-t-secondary leading-relaxed drop-shadow-sm">{s.desc}</div>
+                  </div>
                 </motion.div>
               ))}
             </div>
