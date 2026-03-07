@@ -120,12 +120,7 @@ const SERVICES = [
   },
 ];
 
-const WHY_US = [
-  { num: "01", title: "Business + Technical in One Team", desc: "We speak CFO and CTO in the same meeting. Our team bridges the gap between technical capability and business ROI — no translation needed." },
-  { num: "02", title: "Deeply Rooted in Dubai & the GCC", desc: "Local entity, local team, local network. We understand the region's business culture, procurement cycles, and decision-making dynamics." },
-  { num: "03", title: "POC-First. Results Before Contract.", desc: "We run a short proof of concept on your real environment and data. You see tangible impact before signing anything." },
-  { num: "04", title: "Full-Stack Capability", desc: "From AI models and backend infrastructure to DevOps pipelines and IT governance — we cover the entire technology stack." },
-];
+
 
 const PROCESS_STEPS = [
   { num: "01", title: "Discovery Call", desc: "A focused conversation to understand your operations, technology stack, and the highest-impact opportunities." },
@@ -552,39 +547,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ══════════════
-          WHY US
-      ══════════════ */}
-      <section className="py-28 px-6" id="whyus">
-        <div className="max-w-5xl mx-auto">
-          <Reveal className="mb-14">
-            <SectionLabel>Why Choose Us</SectionLabel>
-            <h2 className="text-[2.8rem] sm:text-[3rem] font-bold tracking-[-0.025em] leading-tight mb-4 max-w-lg">
-              We're not a typical IT vendor.
-            </h2>
-            <p className="text-t-secondary text-lg max-w-lg">
-              A Dubai-based team that combines deep technical expertise with enterprise business acumen.
-            </p>
-          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {WHY_US.map((w, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ scale: 1.02, rotateX: -1, rotateY: i % 2 === 0 ? 2 : -2 }}
-                  style={{ perspective: "900px", transformStyle: "preserve-3d" }}
-                  className="relative bg-surface border border-b-subtle rounded-2xl p-8 cursor-default transition-all duration-300 hover:border-accent/35 hover:shadow-[0_20px_70px_rgba(0,0,0,0.45)] h-full overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                  <span className="text-accent text-sm font-semibold mb-4 block">{w.num}</span>
-                  <h3 className="text-[1.1rem] font-semibold tracking-[-0.01em] mb-3">{w.title}</h3>
-                  <p className="text-t-secondary text-sm leading-relaxed">{w.desc}</p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════
           PROCESS
